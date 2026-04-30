@@ -99,7 +99,7 @@ class PenanaPortfolioScraper:
         history.append(entry)
 
         with open(self.data_file, 'w', encoding='utf-8') as f:
-            json.dump(history[-60:], f, ensure_ascii=False, indent=4)
+            json.dump(history, f, ensure_ascii=False, indent=4)
         print(f"✨ 數據與圖片連結已同步至 {self.data_file}")
 
 if __name__ == "__main__":
