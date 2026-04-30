@@ -1,0 +1,39 @@
+name: Penana Daily Scraper
+
+# 設定執行時機
+on:
+  schedule:
+    - cron: '0 16 * * *' # 每天台灣時間凌晨 0 點執行 (UTC 16:00)
+  workflow_dispatch:      # 允許你在 GitHub 介面上手動點擊「Run workflow」測試
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    # 授予寫入權限，這樣 Actions 才能把更新後的 data.json 推送回你的 Repo
+    permissions:
+      contents: write
+
+    steps:
+      - name: 1. 檢出程式碼
+        uses: actions/checkout@v3
+
+      - name: 2. 安裝 Python 環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: 3. 安裝必要套件
+        run: |
+          pip install cloudscraper beautifulsoup4
+
+      - name: 4. 執行爬蟲腳本
+        run: python scraper.py
+
+      - name: 5. 自動提交並推送數據
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data.json
+          # 檢查是否有變動，避免沒資料更新時報錯
+          git diff --quiet && git diff --staged --quiet || (git commit -m "自動更新數據: $(date)" && git push)
