@@ -38,5 +38,45 @@
                 "url": "https://www.penana.com/story/208700"
             }
         ]
+    },
+    {
+        "update_time": "2026-05-01 08:14:59",
+        "works": [
+            {
+                "id": "211188",
+                "title": "青梅的忍耐極限",
+                "category": "Story",
+                "views": 2,
+                "cover": "https://static2.penana.com/fit-in/400x200/images/books/31/45/31457462869f34a5abbcfd1.31556002-340930.png",
+                "status": "11 hours ago · Updated to #0",
+                "tags": [
+                    "青梅竹馬",
+                    "女性向",
+                    "甜寵",
+                    "雙向暗戀",
+                    "現代言情",
+                    "1v1雙潔",
+                    "蓄謀已久",
+                    "界線跨越"
+                ],
+                "url": "https://www.penana.com/story/211188"
+            },
+            {
+                "id": "208700",
+                "title": "系統偵測：您的擺爛畢業計畫出現漏洞",
+                "category": "Story",
+                "views": 702,
+                "cover": "https://static2.penana.com/fit-in/400x200/images/books/14/07/140719283469d2f8ba836d83.75249660-340930.png",
+                "status": "15 hours ago · Updated to #26",
+                "tags": [
+                    "愛情",
+                    "校園",
+                    "純愛",
+                    "1v1雙潔",
+                    "資管系"
+                ],
+                "url": "https://www.penana.com/story/208700"
+            }
+        ]
     }
 ]

@@ -2,275 +2,202 @@
 <html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>靜待花開｜創作者數據中樞</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>無需多言 靜待花開</title>
+    <link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/seedling.svg" type="image/svg+xml">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;700;900&display=swap');
         
-        body { 
-            font-family: 'Noto Sans TC', sans-serif; 
-            background-color: #fafaf9; /* 極具質感的珍珠白背景 */
-            color: #1c1917;
-        }
-        
-        /* 襯線體用於強調文藝感 */
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #fafaf9; color: #1c1917; overflow-x: hidden; }
         .font-serif-tc { font-family: 'Noto Serif TC', serif; }
 
-        /* 頂級玻璃擬態 */
-        .glass-nav { 
-            background: rgba(250, 250, 249, 0.8); 
-            backdrop-filter: blur(16px); 
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(0,0,0,0.03); 
-        }
-        
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.7); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.8); 
-            box-shadow: 0 4px 24px -8px rgba(0,0,0,0.03);
-        }
+        /* ====== 頂級佈局組件 ====== */
+        .glass-nav { background: rgba(250, 250, 249, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05); }
 
-        /* 懸停絲滑過渡 */
+        /* 鎖定圖片比例 (400x200) */
+        .fixed-cover { aspect-ratio: 2 / 1; width: 100%; object-fit: cover; }
+
+        /* 平台連結滾動區 */
+        .portal-scroll { max-height: 420px; overflow-y: auto; padding-right: 4px; }
+        .portal-scroll::-webkit-scrollbar { width: 3px; }
+        .portal-scroll::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 10px; }
+
+        /* 懸停特效 */
         .hover-card { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .hover-card:hover { 
-            transform: translateY(-6px); 
-            box-shadow: 0 20px 40px -8px rgba(249, 115, 22, 0.08); 
-            border-color: rgba(249, 115, 22, 0.1);
-        }
-        
-        /* 平台按鈕高級感 */
-        .platform-logo { width: 22px; height: 22px; object-fit: contain; border-radius: 4px; }
-        .btn-platform { 
-            transition: all 0.4s ease; 
-            background: white;
-            border: 1px solid rgba(0,0,0,0.04);
-        }
-        .btn-platform:hover { 
-            transform: translateX(6px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+        @media (hover: hover) {
+            .hover-card:hover { transform: translateY(-10px); box-shadow: 0 40px 80px -15px rgba(249, 115, 22, 0.15); }
         }
 
-        /* 自訂細緻捲軸 */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #d6d3d1; }
+        .btn-platform { transition: all 0.3s ease; background: white; border: 1px solid rgba(0,0,0,0.05); }
+        .btn-platform:hover { border-color: #f97316; transform: translateX(4px); }
 
-        /* 進場動畫 */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* 動態背景光斑 */
+        @keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.15); opacity: 0.6; } }
+        .bg-glow-1 { animation: pulseGlow 10s ease-in-out infinite; }
+        .bg-glow-2 { animation: pulseGlow 14s ease-in-out infinite reverse; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
     </style>
 </head>
-<body class="antialiased relative selection:bg-orange-200 selection:text-orange-900">
+<body class="antialiased selection:bg-orange-100">
 
-    <!-- 柔和光影背景 (營造空間感) -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div class="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-orange-50/50 rounded-full blur-[100px]"></div>
-        <div class="absolute bottom-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-slate-50/80 rounded-full blur-[80px]"></div>
+    <div class="fixed inset-0 pointer-events-none -z-10">
+        <div class="absolute top-[-10%] right-[-10%] w-[80vw] h-[80vw] bg-orange-100/50 rounded-full blur-[100px] bg-glow-1"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[70vw] h-[70vw] bg-blue-50/50 rounded-full blur-[100px] bg-glow-2"></div>
     </div>
 
-    <!-- 頂部導覽列 -->
     <nav class="fixed top-0 w-full z-40 glass-nav">
-        <div class="max-w-[1400px] mx-auto px-8 py-5 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-slate-900 text-white rounded-lg flex items-center justify-center shadow-md">
-                    <i class="fa-solid fa-seedling text-sm"></i>
-                </div>
-                <span class="font-bold tracking-widest text-lg text-slate-800">靜待花開 <span class="text-orange-500 font-light">數據中樞</span></span>
-            </div>
-            <!-- 右側留白，保持乾淨簡約 -->
-            <div class="text-xs font-medium text-slate-400 tracking-widest flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div> 系統連線中
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12 py-4 md:py-6 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center shadow-lg"><i class="fa-solid fa-seedling text-orange-400"></i></div>
+                <span class="font-black tracking-tighter text-xl md:text-2xl text-slate-800 font-serif-tc">無需多言 靜待花開</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-xs font-black tracking-widest text-slate-400 uppercase">
+                <a href="#stats" class="hover:text-orange-500 transition">數據趨勢</a>
+                <a href="#portfolio" class="hover:text-orange-500 transition">作品目錄</a>
+                <a href="https://www.threads.net/@fgh09202020" target="_blank" class="px-5 py-2 bg-slate-900 text-white rounded-full hover:bg-orange-500 transition-all">社群</a>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-[1400px] mx-auto px-8 pt-32 pb-20">
+    <main class="max-w-[1400px] mx-auto px-6 md:px-12 pt-32 md:pt-48 pb-20">
         
-        <!-- ================= 頂級個人介紹區 ================= -->
-        <section class="grid grid-cols-1 xl:grid-cols-12 gap-8 mb-16 items-stretch animate-fade-up">
+        <section class="grid grid-cols-1 xl:grid-cols-12 gap-8 mb-24 items-stretch animate-fade-up">
             
-            <!-- 自我介紹卡片 (佔 8 欄，極簡排版) -->
-            <div class="xl:col-span-8 bg-white rounded-[2rem] p-12 md:p-16 shadow-sm border border-slate-100 relative overflow-hidden flex flex-col justify-center">
+            <div class="xl:col-span-8 bg-white rounded-[3rem] p-10 md:p-20 shadow-sm border border-slate-100 relative overflow-hidden flex flex-col justify-center">
                 <div class="relative z-10">
-                    <h1 class="text-5xl md:text-6xl font-black text-slate-900 tracking-tight mb-6 font-serif-tc">無需多言 靜待花開</h1>
+                    <h1 class="text-5xl md:text-[5.5rem] font-black text-slate-900 tracking-tighter mb-8 font-serif-tc leading-[1.1]">無需多言<br>靜待花開</h1>
                     
-                    <div class="flex items-center gap-4 mb-10">
-                        <span class="px-5 py-2 bg-orange-500 text-white text-xs font-bold tracking-widest rounded-full shadow-lg shadow-orange-100/50">故事加工中</span>
-                        <div class="h-px w-16 bg-slate-200"></div>
-                        <span class="text-slate-400 font-medium text-sm tracking-widest">小說作者 × 程式開發</span>
+                    <div class="flex items-center gap-4 mb-12">
+                        <span class="px-6 py-2 bg-orange-500 text-white text-xs font-black tracking-widest rounded-full shadow-xl shadow-orange-100">故事加工中</span>
+                        <div class="h-1 w-12 bg-slate-100 rounded-full"></div>
+                        <span class="text-slate-400 font-bold text-sm tracking-widest uppercase italic">Novelist × Developer</span>
                     </div>
 
-                    <div class="flex flex-wrap gap-4 mb-10">
-                        <div class="px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-full text-xs font-bold text-slate-600 flex items-center gap-2">
-                            <span class="text-green-500"><i class="fa-solid fa-battery-full"></i></span> 當前電量：100%
-                        </div>
-                        <div class="px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-full text-xs font-bold text-slate-600 flex items-center gap-2">
-                            <span class="text-amber-700"><i class="fa-solid fa-mug-hot"></i></span> 驅動來源：咖啡因
-                        </div>
-                        <div class="px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-full text-xs font-bold text-slate-600 flex items-center gap-2">
-                            <span class="text-rose-500"><i class="fa-solid fa-heart"></i></span> 核心成分：熱愛
-                        </div>
+                    <div class="flex flex-wrap gap-4 mb-12">
+                        <div class="px-5 py-2.5 bg-green-50 rounded-2xl text-xs font-bold text-green-700 border border-green-100">🔋 當前電量：100%</div>
+                        <div class="px-5 py-2.5 bg-amber-50 rounded-2xl text-xs font-bold text-amber-700 border border-amber-100">☕ 驅動來源：咖啡</div>
+                        <div class="px-5 py-2.5 bg-rose-50 rounded-2xl text-xs font-bold text-rose-700 border border-rose-100">❤️ 核心成分：熱愛</div>
                     </div>
 
-                    <div class="max-w-2xl border-l-4 border-orange-400 pl-6">
-                        <p class="text-2xl font-bold text-slate-800 leading-relaxed mb-2 font-serif-tc">「專職在空白頁面上，進行無邊際的腦洞實驗。」</p>
-                        <p class="text-slate-500 leading-relaxed tracking-wide">這裡沒有標準答案，只有被咖啡點燃的各種可能。</p>
+                    <div class="max-w-3xl border-l-4 border-orange-400 pl-8">
+                        <p class="text-2xl md:text-3xl font-bold text-slate-800 leading-relaxed mb-4 font-serif-tc">「專職在空白頁面上，進行無邊際的腦洞實驗。」</p>
+                        <p class="text-base md:text-lg text-slate-500 leading-relaxed tracking-wide italic">這裡沒有標準答案，只有被咖啡點燃的各種可能。</p>
                     </div>
                 </div>
-                <!-- 裝飾用巨型引號 -->
-                <i class="fa-solid fa-quote-right absolute -bottom-4 -right-4 text-[16rem] text-slate-50 pointer-events-none"></i>
+                <i class="fa-solid fa-feather absolute -bottom-10 -right-10 md:-bottom-20 md:-right-20 text-[18rem] md:text-[28rem] text-slate-50/80 pointer-events-none transform -rotate-12"></i>
             </div>
 
-            <!-- 跨平台傳送門 (佔 4 欄，輕盈質感) -->
-            <div class="xl:col-span-4 glass-card rounded-[2rem] p-10 flex flex-col">
-                <h3 class="text-slate-400 text-xs font-bold tracking-[0.2em] mb-8 flex items-center">
-                    <i class="fa-solid fa-link mr-2"></i> 跨平台傳送門
-                </h3>
-                <div class="space-y-4 flex-grow flex flex-col justify-center">
-                    
-                    <a href="https://www.penana.com/user/340930" target="_blank" class="btn-platform flex items-center justify-between p-4 rounded-2xl hover:border-orange-400 group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700">
-                            <img src="https://static2.penana.com/img/logo_new.svg" class="platform-logo">
-                            <span class="tracking-wide">Penana 寫作平台</span>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-300 group-hover:text-orange-500 transition-colors"></i>
+            <div class="xl:col-span-4 glass-card rounded-[3rem] p-10 flex flex-col animate-fade-up" style="animation-delay: 150ms">
+                <h3 class="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8"><i class="fa-solid fa-link mr-2"></i> 跨平台傳送門</h3>
+                <div class="portal-scroll space-y-4">
+                    <a href="https://www.penana.com/user/340930" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
+                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="https://static2.penana.com/img/logo_new.svg" class="w-7 h-7 object-contain"> Penana</div>
+                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-orange-500"></i>
                     </a>
-
-                    <a href="https://www.popo.tw/users/fgh09101010" target="_blank" class="btn-platform flex items-center justify-between p-4 rounded-2xl hover:border-pink-400 group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700">
-                            <img src="https://cdn0.popo.tw/web1/images/logo.png" class="platform-logo">
-                            <span class="tracking-wide">POPO 原創市集</span>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-300 group-hover:text-pink-500 transition-colors"></i>
+                    <a href="https://cxc.today/zh/@bloom_in_silence" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
+                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAANlBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAB3d3evr6/GxsaDg4MZGRn///9DQ0OMjIyWlpby8vJcXFy4piOSAAAAB3RSTlMATaHh+//+tZbdyQAAAJRJREFUeAGlkwUSgDAMBOuu/38s7nYwLE4bT8gIZVxItSAFZ5SsUCEvEMsWJm9gYF2KYQeVD/RWdva1sdY4v+rYKfA2TNi4qmCrdNiQFj/5vJ7DSpEznIhr+dWJ+S1scXKBqPFpbjaoeUMAGyrakNEG83tD/ukkCBMkCqYaFguWGzYMbDnYtLjtVy8+j5Zi74YXjH8LO9YaR8bh5HsAAAAASUVORK5CYII=" class="w-7 h-7 object-contain"> CXC 創作者俱樂部</div>
+                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-blue-500"></i>
                     </a>
-
-                    <a href="https://www.kadokado.com.tw/user/283023" target="_blank" class="btn-platform flex items-center justify-between p-4 rounded-2xl hover:border-green-400 group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700">
-                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADmklEQVR4AbzWA3BkTRiF4S/m2rbtMeIxYie/bdu2bdu2bds2173vrZpb1ZuNdaueZHzOVXdLdzZ13D6mTORCDP22JQLH4iIcgTT0a3gSDoXCbchCP4UDi/A5/kMVpD8LpON8KNyE3P7e+0L8ip/g2XDsPrJgVYlhDJZgIPqsQBZugcLpSK0sjhnhc/AYfsS1GIk+KZCBO/EG5vx/9F7m3h8FlbAaob4pAMzFDCQVeUJGeA7u1gr8hwJIn2+JvZ+MT7QCn2B6fxbw4R+twP3I6pUCB5dVyYk1tdl7RCsmnFJbl5sy2yUv7rWTHm44BEpzbK+EN/rjsnO4fESxN3Sh2xX8pNATumabQOkUlzMglzY3meFZuFULX4tIrxQI5UekoijWvMzqWzefH18ItzN4146h8kk+b8gsMAEfawU+x+xeKeDPC0tpYXT7pVbfBjNgkaVEFXhC1+0crRhkcwSMAsX4SyvwUK+d/zpfXHYMl0/0uIJPLzQDQKH14YLIseqG45J5vj+U5jX4kQvpUZH/j95TjL1s8McXulzBV/QSK23+3zg6dTy+AaqFP3EPyjEUgi4PNoMxWh27T1LQHZTqkrjDYvd/pgdZ7YEvllh8vySet+Z/PI5tMAZJ6FSBkbgWb6BMnXpAkrDFCqL1y22+v9oJ3AjVijV4BXtiKpLR7t7vhrVQ+ApFH+y/i5xSW5/OrXjmYouvrQJ343L80EaZ9XgPTUhGqwVm4j0ozUuYfscO28j2wbKpDmfgzTZ+vBYpsOAsfNlGkfcxGVuEp+AUqFacg/RVdr9ECyLbciesbvGj32IxJCEN83FMInA9VMKnmNFaARu+a6PAryh6j1Oxd7xyqMsZfEwvwGD1GhfpYK6RlvNEMqZjX7yAd7EH0rBZeA6uhWrHbcgyhuJYYbSBo7DGLED4V9uHyhbAzG+tyBCMREprex/H3x0U+A2eN/fdSfaMVox2OgOvmgWMC5PBaU/JXSxn1td3eaExGo9CdcKp6qlzRWSEMEkdpt8RjJgPMntm7RQu13+7Q8af/bGmkwVewagTqmul3hd3cc5/MwussPk/3DNWMfmgsio9fDFOx0W4UHMRzkNE+HMzVCd9iOmv77OT7Bopz2WvHzAmKAMX5kP7xisHcZHqBXaHaseDwh8rzsG1uKYdV6EB6WuO2Vtk2DKpKo4tLHCHzmVteF6Tv3SFjFgux1bV6gUmYyfs3opd4ZRNG2gwCgAaZrxRAt+CsAAAAABJRU5ErkJggg==" class="platform-logo">
-                            <span class="tracking-wide">KadoKado 角角者</span>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-300 group-hover:text-green-500 transition-colors"></i>
+                    <a href="https://www.popo.tw/users/fgh09101010" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
+                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAb1BMVEUARX9yps4zfbcwerSRuNbu9PkueLL///8rda/Q4O0ocqzF2em+1OUmb6kfaaMnbKIwbaAkZ50ZYpybt87u8/ZLfqgLU413nLsRW5W7zd3d5u7M2uVokrWqwdQ0a5kXYZuIqMMiXpATXZdaibA6c6GpNlrJAAAAjklEQVR4AWTKBRJCIRRAUX/TXRIGuv81+hgnjEuf4fTf9BXA/BXAAq3bCvsIYIe2Y4N9BIAwRvADvQMglBHOCTR2AM6FVEoLYZQyfAAz9jicD7BHAyBEOueYS3S1OT3AhHwc+dLyqeUEYK76uFUVcrvnNuDaH4dPPcXjKM8BPamaeu+hVpU6QPrqNUzPAwAbYwscEZbkewAAAABJRU5ErkJggg==" class="w-7 h-7 object-contain"> POPO 原創市集</div>
+                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-pink-500"></i>
                     </a>
-
-                    <a href="https://www.threads.com/@fgh09202020" target="_blank" class="btn-platform flex items-center justify-between p-4 rounded-2xl hover:border-slate-900 group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700">
-                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABH0lEQVR4AbWSIYyDQBBFH17hmuAdSdW50zhsPR5bh0FiUCjU+gSFF7jVaCQGt4oE9S9Hk7LctbJPzsts5s8swWsA8CR77Z188k8C17xtywTgj4Ri0c7WXThLLqNkm7Ko+1XuBsEhYZT95oGRUk9Co4EnhWZ/snB1EZB1fR0DvUqOzrtaiEdJWnOINXudgxLIZfOs0RpDlXty3AASgEo1eNMSOAdAWhljZIEjJ6EmgE47a7NXz7LRXGZZtUnWfxa3AJOLgZsGq9rPOW27jIBeOesSnKKkYDQW915ziFV8WoKBYJCkKYHhJC/bGgG3uskBnAt5t/hW3ekqjBqvPOjkokPuUa0225bl77GXKycCqGY9MCEv+Lo3pkz5AIH3aeEHHHmiORlPs9IAAAAASUVORK5CYII=" class="platform-logo">
-                            <span class="tracking-wide">Threads 日常</span>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-300 group-hover:text-slate-900 transition-colors"></i>
+                    <a href="https://www.kadokado.com.tw/user/283023" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
+                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADmklEQVR4AbzWA3BkTRiF4S/m2rbtMeIxYie/bdu2bdu2bds2173vrZpb1ZuNdaueZHzOVXdLdzZ13D6mTORCDP22JQLH4iIcgTT0a3gSDoXCbchCP4UDi/A5/kMVpD8LpON8KNyE3P7e+0L8ip/g2XDsPrJgVYlhDJZgIPqsQBZugcLpSK0sjhnhc/AYfsS1GIk+KZCBO/EG5vx/9F7m3h8FlbAaob4pAMzFDCQVeUJGeA7u1gr8hwJIn2+JvZ+MT7QCn2B6fxbw4R+twP3I6pUCB5dVyYk1tdl7RCsmnFJbl5sy2yUv7rWTHm44BEpzbK+EN/rjsnO4fESxN3Sh2xX8pNATumabQOkUlzMglzY3meFZuFULX4tIrxQI5UekoijWvMzqWzefH18ItzN4146h8kk+b8gsMAEfawU+x+xeKeDPC0tpYXT7pVbfBjNgkaVEFXhC1+0crRhkcwSMAsX4SyvwUK+d/zpfXHYMl0/0uIJPLzQDQKH14YLIseqG45J5vj+U5jX4kQvpUZH/j95TjL1s8McXulzBV/QSK23+3zg6dTy+AaqFP3EPyjEUgi4PNoMxWh27T1LQHZTqkrjDYvd/pgdZ7YEvllh8vySet+Z/PI5tMAZJ6FSBkbgWb6BMnXpAkrDFCqL1y22+v9oJ3AjVijV4BXtiKpLR7t7vhrVQ+ApFH+y/i5xSW5/OrXjmYouvrQJ343L80EaZ9XgPTUhGqwVm4j0ozUuYfscO28j2wbKpDmfgzTZ+vBYpsOAsfNlGkfcxGVuEp+AUqFacg/RVdr9ECyLbciesbvGj32IxJCEN83FMInA9VMKnmNFaARu+a6PAryh6j1Oxd7xyqMsZfEwvwGD1GhfpYK6RlvNEMqZjX7yAd7EH0rBZeA6uhWrHbcgyhuJYYbSBo7DGLED4V9uHyhbAzG+tyBCMREprex/H3x0U+A2eN/fdSfaMVox2OgOvmgWMC5PBaU/JXSxn1td3eaExGo9CdcKp6qlzRWSEMEkdpt8RjJgPMntm7RQu13+7Q8af/bGmkwVewagTqmul3hd3cc5/MwussPk/3DNWMfmgsio9fDFOx0W4UHMRzkNE+HMzVCd9iOmv77OT7Bopz2WvHzAmKAMX5kP7xisHcZHqBXaHaseDwh8rzsG1uKYdV6EB6WuO2Vtk2DKpKo4tLHCHzmVteF6Tv3SFjFgux1bV6gUmYyfs3opd4ZRNG2gwCgAaZrxRAt+CsAAAAABJRU5ErkJggg==" class="w-7 h-7 object-contain"> KadoKado 角角者</div>
+                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-green-500"></i>
                     </a>
-
-                    <a href="https://cxc.today/zh/@bloom_in_silence" target="_blank" class="btn-platform flex items-center justify-between p-4 rounded-2xl hover:border-blue-400 group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700">
-                            <div class="platform-logo flex items-center justify-center bg-blue-50 text-blue-500 text-[10px]">CXC</div>
-                            <span class="tracking-wide">CXC 創作者俱樂部</span>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-300 group-hover:text-blue-500 transition-colors"></i>
+                    <a href="https://www.threads.com/@fgh09202020" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
+                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABH0lEQVR4AbWSIYyDQBBFH17hmuAdSdW50zhsPR5bh0FiUCjU+gSFF7jVaCQGt4oE9S9Hk7LctbJPzsts5s8swWsA8CR77Z188k8C17xtywTgj4Ri0c7WXThLLqNkm7Ko+1XuBsEhYZT95oGRUk9Co4EnhWZ/snB1EZB1fR0DvUqOzrtaiEdJWnOINXudgxLIZfOs0RpDlXty3AASgEo1eNMSOAdAWhljZIEjJ6EmgE47a7NXz7LRXGZZtUnWfxa3AJOLgZsGq9rPOW27jIBeOesSnKKkYDQW915ziFV8WoKBYJCkKYHhJC/bGgG3uskBnAt5t/hW3ekqjBqvPOjkokPuUa0225bl77GXKycCqGY9MCEv+Lo3pkz5AIH3aeEHHHmiORlPs9IAAAAASUVORK5CYII=" class="w-7 h-7 object-contain"> Threads 日常</div>
+                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-slate-900"></i>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- ================= KPI 數據卡片區 ================= -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 animate-fade-up delay-100">
-            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col">
-                <span class="text-slate-400 text-xs font-bold tracking-widest mb-3 flex items-center"><i class="fa-solid fa-eye text-orange-400 mr-2"></i>全網總點閱數</span>
-                <div id="kpi-total" class="text-5xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
+        <section id="stats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 animate-fade-up scroll-mt-32">
+            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 flex flex-col group overflow-visible shadow-sm">
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4"><i class="fa-solid fa-eye text-orange-400 mr-2"></i>總點閱</span>
+                <div id="kpi-total" class="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
             </div>
-            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col">
-                <span class="text-slate-400 text-xs font-bold tracking-widest mb-3 flex items-center"><i class="fa-solid fa-book-open text-blue-400 mr-2"></i>連載中作品數</span>
-                <div id="kpi-works" class="text-5xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
+            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 flex flex-col group shadow-sm">
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4"><i class="fa-solid fa-book-open text-blue-400 mr-2"></i>連載作品數</span>
+                <div id="kpi-works" class="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
             </div>
-            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col">
-                <span class="text-slate-400 text-xs font-bold tracking-widest mb-3 flex items-center"><i class="fa-solid fa-chart-pie text-green-400 mr-2"></i>單本平均點閱</span>
-                <div id="kpi-avg" class="text-5xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
+            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 flex flex-col group shadow-sm">
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4"><i class="fa-solid fa-chart-simple text-green-400 mr-2"></i>單本平均值</span>
+                <div id="kpi-avg" class="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
             </div>
-            <div class="bg-slate-900 p-8 rounded-[2rem] shadow-xl shadow-slate-200 flex flex-col relative overflow-hidden">
-                <i class="fa-solid fa-chart-network absolute -right-6 -bottom-6 text-8xl text-slate-800"></i>
-                <span class="text-slate-400 text-xs font-bold tracking-widest mb-3 relative z-10">最後同步時間</span>
-                <div id="kpi-sync" class="text-xl font-bold text-white mt-auto relative z-10 tracking-widest">載入中...</div>
+            <div class="bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl flex flex-col relative overflow-hidden">
+                <div class="absolute -right-4 -bottom-4 text-8xl text-white/5 opacity-20"><i class="fa-solid fa-satellite-dish"></i></div>
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4 relative z-10">最後同步</span>
+                <div id="kpi-sync" class="text-lg md:text-2xl font-bold text-white mt-auto relative z-10 tracking-widest uppercase">Syncing...</div>
             </div>
         </section>
 
-        <!-- ================= 全局趨勢圖 ================= -->
-        <section class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 mb-16 animate-fade-up delay-200">
-            <div class="flex justify-between items-end mb-8">
+        <section class="bg-white p-8 md:p-16 rounded-[3.5rem] border border-slate-100 shadow-sm mb-24 animate-fade-up">
+            <h2 class="text-3xl font-black text-slate-900 font-serif-tc mb-12 tracking-tight flex items-center">
+                <span class="w-3 h-10 bg-orange-500 rounded-full mr-6"></span> 點閱成長軌跡
+            </h2>
+            <div class="h-[300px] md:h-[450px] w-full"><canvas id="mainChart"></canvas></div>
+        </section>
+
+        <section id="portfolio" class="scroll-mt-32 animate-fade-up">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                 <div>
-                    <h2 class="text-2xl font-black text-slate-900 tracking-wide mb-1">整體點閱增長趨勢</h2>
-                    <p class="text-slate-400 text-sm tracking-wide">自動追蹤全平台作品的綜合表現</p>
+                    <h2 class="text-5xl font-black text-slate-900 font-serif-tc tracking-tight mb-4 text-center md:text-left">精選作品集</h2>
+                    <p class="text-slate-400 text-base font-bold tracking-widest uppercase text-center md:text-left">Curated Works & Insights</p>
+                </div>
+                <div class="relative w-full md:w-96 group">
+                    <i class="fa-solid fa-magnifying-glass absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-orange-500 transition-colors"></i>
+                    <input type="text" id="searchInput" placeholder="搜尋作品名稱或標籤..." class="bg-white border border-slate-200 rounded-full pl-14 pr-6 py-4 font-bold focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none w-full shadow-sm transition-all" onkeyup="filterAndSortWorks()">
                 </div>
             </div>
-            <div class="h-80 w-full"><canvas id="mainChart"></canvas></div>
+            
+            <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                </div>
         </section>
-
-        <!-- ================= 精選作品網格 ================= -->
-        <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-10 animate-fade-up delay-200">
-            <div>
-                <h2 class="text-3xl font-black text-slate-900 tracking-wide mb-2">精選作品集</h2>
-                <p class="text-slate-400 text-sm tracking-wide">點擊任意作品卡片以進行深度數據分析</p>
-            </div>
-            <div class="relative w-full md:w-80">
-                <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                <input type="text" id="searchInput" placeholder="搜尋作品名稱或分類..." class="w-full bg-white border border-slate-200 text-sm font-medium rounded-full pl-12 pr-5 py-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition shadow-sm" onkeyup="filterAndSortWorks()">
-            </div>
-        </div>
-
-        <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10">
-            <!-- 載入動畫骨架 -->
-            <div class="col-span-full text-center py-20 text-slate-400 tracking-widest text-sm">
-                <i class="fa-solid fa-circle-notch fa-spin text-2xl mb-4 text-orange-400 block"></i> 正在載入作品數據...
-            </div>
-        </div>
 
     </main>
 
-    <footer class="text-center py-12 border-t border-slate-200 text-slate-400 text-xs font-medium tracking-widest">
-        Designed & Coded by Chien-Chang Chen.
+    <footer class="text-center py-20 border-t border-slate-100 mt-20 text-slate-300 font-black text-[10px] tracking-[0.5em] uppercase">
+        © 2026 無需多言 靜待花開 · Logic Crafted Visualization
     </footer>
 
-    <!-- ================= 深度分析 Modal ================= -->
-    <div id="analysisModal" class="fixed inset-0 z-50 hidden bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 md:p-8 opacity-0 transition-all duration-400">
-        <div class="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-6xl overflow-hidden transform scale-95 transition-all duration-400 flex flex-col lg:flex-row max-h-[90vh]" id="modalContent">
+    <div id="analysisModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xl flex items-center justify-center p-4 md:p-10 opacity-0 transition-all duration-500">
+        <div class="bg-white rounded-[3.5rem] shadow-2xl w-full max-w-7xl overflow-y-auto md:overflow-hidden transform scale-95 opacity-0 transition-all duration-500 flex flex-col lg:flex-row max-h-[92vh] md:max-h-[85vh]" id="modalContent">
             
-            <!-- 左側作品資訊 -->
-            <div class="lg:w-2/5 bg-slate-50 p-10 md:p-14 flex flex-col border-b lg:border-b-0 lg:border-r border-slate-100 overflow-y-auto">
-                <div class="w-full aspect-[2/1] relative overflow-hidden rounded-2xl shadow-md mb-8 border border-white">
-                    <img id="modal-cover" src="" class="w-full h-full object-cover">
+            <div class="lg:w-5/12 bg-slate-50 p-10 md:p-16 flex flex-col border-b lg:border-b-0 lg:border-r border-slate-100 lg:overflow-y-auto">
+                <div class="w-full aspect-[2/1] relative overflow-hidden rounded-[2rem] shadow-lg mb-10 border-4 border-white">
+                    <img id="modal-cover" src="" class="fixed-cover">
                 </div>
-                
-                <div class="flex items-center gap-3 mb-4">
-                    <span id="modal-category" class="px-3 py-1 bg-orange-100 text-orange-600 text-[10px] font-bold rounded-md tracking-widest">分類</span>
-                    <span id="modal-status" class="text-xs text-slate-400 font-medium tracking-wide">更新狀態</span>
+                <h2 id="modal-title" class="text-3xl md:text-4xl font-black text-slate-900 mb-6 font-serif-tc leading-tight">標題</h2>
+                <div id="modal-tags" class="flex flex-wrap gap-2 mb-10"></div>
+                <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm mb-8">
+                    <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-2">作品進度</span>
+                    <span id="modal-status" class="text-xl font-bold text-slate-700">讀取中...</span>
                 </div>
-                
-                <h2 id="modal-title" class="text-3xl font-black text-slate-900 mb-8 leading-snug font-serif-tc">作品標題</h2>
-                
-                <div class="mt-auto bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
-                    <span class="text-xs text-slate-400 font-bold tracking-widest block mb-2"><i class="fa-solid fa-chart-simple mr-2"></i>累計總點閱</span>
-                    <span id="modal-views" class="text-5xl font-black text-orange-500 tracking-tighter">0</span>
+                <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-xl">
+                    <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-2 text-orange-500">累計觀看人數</span>
+                    <span id="modal-views" class="text-6xl font-black text-slate-900 tracking-tighter">0</span>
                 </div>
+                <a id="modal-url" href="#" target="_blank" class="mt-10 w-full py-5 bg-slate-900 text-white rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-orange-500 transition-all shadow-xl active:scale-95">
+                    <i class="fa-solid fa-book-open-reader text-2xl"></i> 前往閱讀此書
+                </a>
             </div>
 
-            <!-- 右側分析圖表 -->
-            <div class="lg:w-3/5 p-10 md:p-14 relative bg-white flex flex-col">
-                <button onclick="closeModal()" class="absolute top-8 right-8 w-10 h-10 bg-slate-50 hover:bg-slate-100 text-slate-400 hover:text-slate-800 rounded-full flex items-center justify-center transition-colors">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-                
-                <h3 class="text-xl font-bold text-slate-800 mb-8 tracking-wide">單部作品數據解析</h3>
-                <div class="flex-grow w-full min-h-[300px]">
-                    <canvas id="modalChart"></canvas>
-                </div>
+            <div class="lg:w-7/12 p-8 md:p-16 relative bg-white flex flex-col">
+                <button onclick="closeModal()" class="absolute top-10 right-10 w-12 h-12 bg-slate-50 hover:bg-slate-100 hover:rotate-90 text-slate-400 hover:text-slate-900 rounded-full flex items-center justify-center transition-all duration-300"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <h3 class="text-2xl font-black text-slate-800 mb-12 tracking-wide font-serif-tc flex items-center"><i class="fa-solid fa-chart-pie text-orange-400 mr-4"></i> 趨勢深度解析</h3>
+                <div class="flex-grow w-full min-h-[350px] md:h-auto"><canvas id="modalChart"></canvas></div>
             </div>
         </div>
     </div>
@@ -281,9 +208,14 @@
         let modalChartInstance = null;
         let mainChartInstance = null;
 
-        // 全域圖表字體設定 (符合繁體中文閱讀)
         Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
         Chart.defaults.color = '#94a3b8';
+
+        function formatStatus(raw) {
+            if (!raw) return "未知進度";
+            let chapterPart = raw.includes('·') ? raw.split('·').pop().trim() : raw;
+            return chapterPart.replace('Updated to #', '更新至第 ').replace('#', '第 ') + ' 章';
+        }
 
         async function init() {
             try {
@@ -293,17 +225,9 @@
                     const latest = globalHistory[globalHistory.length - 1];
                     latestWorks = latest.works;
                     updateKPIs(latest);
-                    renderMainChart(globalHistory);
-                    filterAndSortWorks();
+                    setTimeout(() => { renderMainChart(globalHistory); filterAndSortWorks(); }, 500);
                 }
-            } catch (e) { 
-                console.error("Data Load Fail", e); 
-                document.getElementById('work-grid').innerHTML = `
-                    <div class="col-span-full text-center py-20 bg-white rounded-3xl border border-dashed border-slate-300">
-                        <i class="fa-solid fa-triangle-exclamation text-3xl text-slate-300 mb-4 block"></i>
-                        <span class="text-slate-500 font-medium tracking-widest text-sm">無法讀取數據，請確認 data.json 檔案是否存在。</span>
-                    </div>`;
-            }
+            } catch (e) { console.error("載入失敗", e); }
         }
 
         function animateValue(id, start, end, duration) {
@@ -313,32 +237,24 @@
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                // 使用 toLocaleString 加上千位撇號
-                obj.innerText = Math.floor(progress * (end - start) + start).toLocaleString();
+                const easeProgress = 1 - Math.pow(1 - progress, 4);
+                obj.innerText = Math.floor(easeProgress * (end - start) + start).toLocaleString();
                 if (progress < 1) window.requestAnimationFrame(step);
             };
             window.requestAnimationFrame(step);
         }
 
         function updateKPIs(latestRecord) {
-            const totalViews = latestRecord.works.reduce((sum, w) => sum + w.views, 0);
-            const totalWorks = latestRecord.works.length;
-            const avgViews = totalWorks > 0 ? Math.floor(totalViews / totalWorks) : 0;
-            
-            animateValue('kpi-total', 0, totalViews, 1500);
-            animateValue('kpi-works', 0, totalWorks, 1000);
-            animateValue('kpi-avg', 0, avgViews, 1200);
-            
-            // 格式化時間顯示
-            const syncTime = latestRecord.update_time.split(' ')[0].replace(/-/g, '/');
-            document.getElementById('kpi-sync').innerText = syncTime;
+            const total = latestRecord.works.reduce((s, w) => s + w.views, 0);
+            animateValue('kpi-total', 0, total, 2000);
+            animateValue('kpi-works', 0, latestRecord.works.length, 1500);
+            animateValue('kpi-avg', 0, Math.floor(total / latestRecord.works.length), 1800);
+            document.getElementById('kpi-sync').innerText = latestRecord.update_time.split(' ')[0].replace(/-/g, '/');
         }
 
         function filterAndSortWorks() {
             const keyword = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = latestWorks.filter(w => w.title.toLowerCase().includes(keyword) || w.category.toLowerCase().includes(keyword));
-            
-            // 預設以點閱數高低排序
+            const filtered = latestWorks.filter(w => w.title.toLowerCase().includes(keyword) || w.tags.some(t => t.toLowerCase().includes(keyword)));
             filtered.sort((a, b) => b.views - a.views);
             renderWorkGrid(filtered);
         }
@@ -346,25 +262,40 @@
         function renderWorkGrid(works) {
             const grid = document.getElementById('work-grid');
             if (works.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-16 text-slate-400 text-sm tracking-widest">找不到符合的作品。</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-20 text-slate-300 font-black text-2xl tracking-[0.2em]">🍃 查無相符作品</div>`;
                 return;
             }
 
-            grid.innerHTML = works.map(work => `
-                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden hover-card cursor-pointer group flex flex-col" onclick="openModal('${work.id}')">
+            grid.innerHTML = works.map((work, index) => `
+                <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 overflow-hidden hover-card cursor-pointer group flex flex-col h-full" onclick="openModal('${work.id}')" style="animation: fadeUp 0.6s ${index * 0.1}s both;">
                     <div class="w-full aspect-[2/1] relative overflow-hidden bg-slate-50">
-                        <img src="${work.cover}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-slate-900/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                            <span class="px-5 py-2.5 bg-white text-slate-900 rounded-full text-xs font-bold tracking-widest shadow-xl">檢視深度分析</span>
+                        <img src="${work.cover}" class="fixed-cover transition-transform duration-1000 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-slate-900/20 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <span class="px-8 py-3 bg-white text-slate-900 rounded-full text-xs font-black tracking-widest shadow-2xl">數據分析</span>
                         </div>
                     </div>
-                    <div class="p-8 flex flex-col flex-grow">
-                        <span class="text-[10px] font-bold text-orange-500 tracking-widest mb-3">${work.category}</span>
-                        <h3 class="text-xl font-bold text-slate-900 leading-snug mb-6 group-hover:text-orange-500 transition-colors font-serif-tc">${work.title}</h3>
-                        <div class="mt-auto flex justify-between items-end pt-4 border-t border-slate-50">
-                            <span class="text-xs text-slate-400 font-medium tracking-wide w-1/2 truncate pr-2">${work.status.split('·')[0]}</span>
-                            <span class="text-2xl font-black text-slate-900 tracking-tighter">${work.views.toLocaleString()}</span>
+                    <div class="p-10 flex flex-col flex-grow">
+                        <h3 class="text-2xl md:text-3xl font-black text-slate-900 leading-snug mb-6 group-hover:text-orange-500 transition-colors font-serif-tc line-clamp-2 h-[4.2rem] overflow-hidden">${work.title}</h3>
+                        
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            ${work.tags.slice(0, 3).map(t => `<span class="px-3 py-1 bg-slate-50 text-slate-500 text-[10px] font-bold rounded-lg border border-slate-100">#${t}</span>`).join('')}
+                            ${work.tags.length > 3 ? `<span class="text-slate-300 text-[10px] font-bold self-center">+${work.tags.length - 3}</span>` : ''}
                         </div>
+
+                        <div class="flex justify-between items-end mb-10 pt-6 border-t border-slate-50 mt-auto">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-1">作品進度</span>
+                                <span class="text-lg text-slate-700 font-black">${formatStatus(work.status)}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-1 block">累積點閱</span>
+                                <span class="text-3xl font-black text-slate-900 tracking-tighter">${work.views.toLocaleString()}</span>
+                            </div>
+                        </div>
+
+                        <a href="${work.url}" target="_blank" onclick="event.stopPropagation()" class="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-orange-500 transition-all shadow-xl active:scale-95">
+                            <i class="fa-solid fa-book-open-reader text-xl"></i> 立即閱讀
+                        </a>
                     </div>
                 </div>
             `).join('');
@@ -378,21 +309,22 @@
 
             document.getElementById('modal-cover').src = bookInfo.cover;
             document.getElementById('modal-title').innerText = bookInfo.title;
-            document.getElementById('modal-category').innerText = bookInfo.category;
-            document.getElementById('modal-status').innerText = bookInfo.status.split('·')[0];
+            document.getElementById('modal-status').innerText = formatStatus(bookInfo.status);
             document.getElementById('modal-views').innerText = bookInfo.views.toLocaleString();
+            document.getElementById('modal-url').href = bookInfo.url || '#';
+            
+            const tagContainer = document.getElementById('modal-tags');
+            tagContainer.innerHTML = bookInfo.tags.map(t => `<span class="px-4 py-1.5 bg-white text-slate-500 text-xs font-bold rounded-xl border border-slate-100">#${t}</span>`).join('');
 
-            const historyLabels = globalHistory.map(h => h.update_time.split(' ')[0].slice(5).replace('-', '/'));
-            const historyData = globalHistory.map(h => {
+            const historyLabels = globalHistory.slice(-20).map(h => h.update_time.split(' ')[0].slice(5).replace('-', '/'));
+            const historyData = globalHistory.slice(-20).map(h => {
                 const w = h.works.find(work => work.id === bookId);
                 return w ? w.views : null;
             });
 
             if(modalChartInstance) modalChartInstance.destroy();
             const ctx = document.getElementById('modalChart').getContext('2d');
-            
-            // 漸層填充設定
-            let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            let gradient = ctx.createLinearGradient(0, 0, 0, 450);
             gradient.addColorStop(0, 'rgba(249, 115, 22, 0.2)');
             gradient.addColorStop(1, 'rgba(249, 115, 22, 0)');
 
@@ -401,65 +333,49 @@
                 data: {
                     labels: historyLabels,
                     datasets: [{
-                        label: '單日累計點閱',
+                        label: '點閱歷史',
                         data: historyData,
                         borderColor: '#f97316',
-                        borderWidth: 3,
+                        borderWidth: 4,
                         tension: 0.4,
                         fill: true,
                         backgroundColor: gradient,
-                        pointRadius: 4,
+                        pointRadius: 0,
+                        pointHoverRadius: 10,
                         pointBackgroundColor: '#fff',
-                        pointBorderColor: '#f97316',
-                        pointBorderWidth: 2,
-                        pointHoverRadius: 6
+                        pointBorderWidth: 4
                     }]
                 },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { 
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: 'rgba(28, 25, 23, 0.9)',
-                            titleFont: { size: 13, family: "'Noto Sans TC', sans-serif" },
-                            bodyFont: { size: 14, weight: 'bold', family: "'Noto Sans TC', sans-serif" },
-                            padding: 12,
-                            cornerRadius: 8,
-                            displayColors: false
-                        }
-                    },
-                    scales: {
-                        x: { grid: { display: false } },
-                        y: { border: { display: false }, grid: { color: '#f1f5f9' } }
-                    }
+                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 1500, easing: 'easeOutQuart' }, plugins: { legend: { display: false } },
+                    scales: { x: { grid: { display: false }, ticks: { font: { weight: 'bold' } } },
+                        y: { border: { display: false }, grid: { color: '#f1f5f9' }, ticks: { font: { weight: 'bold' } } } }
                 }
             });
 
             modal.classList.remove('hidden');
-            // 觸發重繪以啟用過渡動畫
             void modal.offsetWidth;
             modal.classList.remove('opacity-0');
-            content.classList.remove('scale-95');
+            content.classList.remove('scale-95', 'opacity-0');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             const modal = document.getElementById('analysisModal');
             const content = document.getElementById('modalContent');
             modal.classList.add('opacity-0');
-            content.classList.add('scale-95');
-            setTimeout(() => { modal.classList.add('hidden'); }, 400);
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = ''; }, 500);
         }
 
+        document.getElementById('analysisModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
         function renderMainChart(history) {
-            // 取最近 15 筆記錄
-            const labels = history.slice(-15).map(h => h.update_time.split(' ')[0].slice(5).replace('-', '/'));
-            const data = history.slice(-15).map(h => h.works.reduce((s, w) => s + w.views, 0));
-            
+            const displaySet = history.slice(-20);
+            const labels = displaySet.map(h => h.update_time.split(' ')[0].slice(5).replace('-', '/'));
+            const data = displaySet.map(h => h.works.reduce((s, w) => s + w.views, 0));
             if(mainChartInstance) mainChartInstance.destroy();
             const ctx = document.getElementById('mainChart').getContext('2d');
-            
-            let gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            let gradient = ctx.createLinearGradient(0, 0, 0, 450);
             gradient.addColorStop(0, 'rgba(15, 23, 42, 0.08)');
             gradient.addColorStop(1, 'rgba(15, 23, 42, 0)');
 
@@ -467,40 +383,11 @@
                 type: 'line',
                 data: {
                     labels: labels,
-                    datasets: [{
-                        label: '全網總點閱',
-                        data: data,
-                        borderColor: '#0f172a',
-                        borderWidth: 3,
-                        tension: 0.4,
-                        fill: true,
-                        backgroundColor: gradient,
-                        pointRadius: 4,
-                        pointBackgroundColor: '#fff',
-                        pointBorderColor: '#0f172a',
-                        pointBorderWidth: 2,
-                        pointHoverRadius: 6
-                    }]
+                    datasets: [{ label: '全網點閱', data: data, borderColor: '#0f172a', borderWidth: 5, tension: 0.4, fill: true, backgroundColor: gradient, pointRadius: 0, pointHoverRadius: 8, pointBackgroundColor: '#fff', pointBorderColor: '#0f172a', pointBorderWidth: 3 }]
                 },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { 
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: 'rgba(28, 25, 23, 0.9)',
-                            titleFont: { size: 13 },
-                            bodyFont: { size: 14, weight: 'bold' },
-                            padding: 12,
-                            cornerRadius: 8,
-                            displayColors: false
-                        }
-                    },
-                    interaction: { mode: 'index', intersect: false },
-                    scales: {
-                        x: { grid: { display: false } },
-                        y: { border: { display: false }, grid: { color: '#f1f5f9', borderDash: [4, 4] } }
-                    }
+                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 2000, easing: 'easeOutExpo' }, interaction: { mode: 'index', intersect: false }, plugins: { legend: { display: false } },
+                    scales: { x: { grid: { display: false }, ticks: { font: { weight: 'bold' } } },
+                        y: { border: { display: false }, grid: { color: '#f8fafc', borderDash: [6, 6] }, ticks: { font: { weight: 'bold' } } } }
                 }
             });
         }
