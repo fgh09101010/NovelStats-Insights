@@ -7,6 +7,19 @@
     <title>無需多言 靜待花開</title>
     <link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/seedling.svg" type="image/svg+xml">
     
+    <!-- ================= GA4 專業流量追蹤代碼 ================= -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFPGEY1WFF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CFPGEY1WFF');
+    </script>
+    <!-- ========================================================= -->
+
+    <!-- ================= 不蒜子 (Busuanzi) 計數器腳本 ================= -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -14,22 +27,18 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;700;900&display=swap');
         
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #fafaf9; color: #1c1917; overflow-x: hidden; }
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #fafaf9; color: #1c1917; overflow-x: hidden; -webkit-tap-highlight-color: transparent;}
         .font-serif-tc { font-family: 'Noto Serif TC', serif; }
 
-        /* ====== 頂級佈局組件 ====== */
-        .glass-nav { background: rgba(250, 250, 249, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05); }
+        .glass-nav { background: rgba(250, 250, 249, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.06); }
 
-        /* 鎖定圖片比例 (400x200) */
-        .fixed-cover { aspect-ratio: 2 / 1; width: 100%; object-fit: cover; }
+        .fixed-cover { aspect-ratio: 2 / 1; width: 100%; object-fit: cover; object-position: center; }
 
-        /* 平台連結滾動區 */
         .portal-scroll { max-height: 420px; overflow-y: auto; padding-right: 4px; }
         .portal-scroll::-webkit-scrollbar { width: 3px; }
         .portal-scroll::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 10px; }
 
-        /* 懸停特效 */
         .hover-card { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         @media (hover: hover) {
             .hover-card:hover { transform: translateY(-10px); box-shadow: 0 40px 80px -15px rgba(249, 115, 22, 0.15); }
@@ -38,20 +47,28 @@
         .btn-platform { transition: all 0.3s ease; background: white; border: 1px solid rgba(0,0,0,0.05); }
         .btn-platform:hover { border-color: #f97316; transform: translateX(4px); }
 
-        /* 動態背景光斑 */
-        @keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.15); opacity: 0.6; } }
-        .bg-glow-1 { animation: pulseGlow 10s ease-in-out infinite; }
-        .bg-glow-2 { animation: pulseGlow 14s ease-in-out infinite reverse; }
+        .number-display { line-height: 1.1 !important; padding-bottom: 0.1em; }
+
+        @keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.15); opacity: 0.5; } }
+        .bg-glow-1 { animation: pulseGlow 12s ease-in-out infinite; }
+        .bg-glow-2 { animation: pulseGlow 16s ease-in-out infinite reverse; }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 10px; }
+
+        /* 隱藏不蒜子預設的載入文字，我們用自定義樣式 */
+        .busuanzi_value { display: inline-block; min-width: 20px; }
     </style>
 </head>
 <body class="antialiased selection:bg-orange-100">
 
     <div class="fixed inset-0 pointer-events-none -z-10">
-        <div class="absolute top-[-10%] right-[-10%] w-[80vw] h-[80vw] bg-orange-100/50 rounded-full blur-[100px] bg-glow-1"></div>
-        <div class="absolute bottom-[-10%] left-[-10%] w-[70vw] h-[70vw] bg-blue-50/50 rounded-full blur-[100px] bg-glow-2"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[80vw] md:w-[60vw] h-[80vw] md:h-[60vw] bg-orange-100/50 rounded-full blur-[100px] md:blur-[140px] bg-glow-1"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[70vw] md:w-[50vw] h-[70vw] md:h-[50vw] bg-blue-50/50 rounded-full blur-[100px] md:blur-[140px] bg-glow-2"></div>
     </div>
 
     <nav class="fixed top-0 w-full z-40 glass-nav">
@@ -64,6 +81,9 @@
                 <a href="#stats" class="hover:text-orange-500 transition">數據趨勢</a>
                 <a href="#portfolio" class="hover:text-orange-500 transition">作品目錄</a>
                 <a href="https://www.threads.net/@fgh09202020" target="_blank" class="px-5 py-2 bg-slate-900 text-white rounded-full hover:bg-orange-500 transition-all">社群</a>
+            </div>
+            <div class="md:hidden">
+                <a href="https://www.threads.net/@fgh09202020" target="_blank" class="w-10 h-10 flex items-center justify-center bg-slate-900 text-white rounded-full shadow-md active:scale-95 transition-transform"><i class="fa-brands fa-threads"></i></a>
             </div>
         </div>
     </nav>
@@ -104,11 +124,11 @@
                         <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-orange-500"></i>
                     </a>
                     <a href="https://cxc.today/zh/@bloom_in_silence" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAANlBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAB3d3evr6/GxsaDg4MZGRn///9DQ0OMjIyWlpby8vJcXFy4piOSAAAAB3RSTlMATaHh+//+tZbdyQAAAJRJREFUeAGlkwUSgDAMBOuu/38s7nYwLE4bT8gIZVxItSAFZ5SsUCEvEMsWJm9gYF2KYQeVD/RWdva1sdY4v+rYKfA2TNi4qmCrdNiQFj/5vJ7DSpEznIhr+dWJ+S1scXKBqPFpbjaoeUMAGyrakNEG83tD/ukkCBMkCqYaFguWGzYMbDnYtLjtVy8+j5Zi74YXjH8LO9YaR8bh5HsAAAAASUVORK5CYII=" class="w-7 h-7 object-contain"> CXC 創作者俱樂部</div>
+                        <div class="flex items-center gap-4 font-bold text-slate-700"><div class="w-7 h-7 flex items-center justify-center bg-blue-50 text-blue-500 text-[10px] rounded-lg font-black">CXC</div> CXC 創作者俱樂部</div>
                         <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-blue-500"></i>
                     </a>
                     <a href="https://www.popo.tw/users/fgh09101010" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAb1BMVEUARX9yps4zfbcwerSRuNbu9PkueLL///8rda/Q4O0ocqzF2em+1OUmb6kfaaMnbKIwbaAkZ50ZYpybt87u8/ZLfqgLU413nLsRW5W7zd3d5u7M2uVokrWqwdQ0a5kXYZuIqMMiXpATXZdaibA6c6GpNlrJAAAAjklEQVR4AWTKBRJCIRRAUX/TXRIGuv81+hgnjEuf4fTf9BXA/BXAAq3bCvsIYIe2Y4N9BIAwRvADvQMglBHOCTR2AM6FVEoLYZQyfAAz9jicD7BHAyBEOueYS3S1OT3AhHwc+dLyqeUEYK76uFUVcrvnNuDaH4dPPcXjKM8BPamaeu+hVpU6QPrqNUzPAwAbYwscEZbkewAAAABJRU5ErkJggg==" class="w-7 h-7 object-contain"> POPO 原創市集</div>
+                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="https://cdn0.popo.tw/web1/images/logo.png" class="w-7 h-7 object-contain"> POPO 原創市集</div>
                         <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-pink-500"></i>
                     </a>
                     <a href="https://www.kadokado.com.tw/user/283023" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
@@ -123,9 +143,10 @@
             </div>
         </section>
 
+        <!-- 數據卡片區 -->
         <section id="stats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 animate-fade-up scroll-mt-32">
             <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 flex flex-col group overflow-visible shadow-sm">
-                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4"><i class="fa-solid fa-eye text-orange-400 mr-2"></i>總點閱</span>
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4"><i class="fa-solid fa-eye text-orange-400 mr-2"></i>全網總點閱</span>
                 <div id="kpi-total" class="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
             </div>
             <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 flex flex-col group shadow-sm">
@@ -138,11 +159,12 @@
             </div>
             <div class="bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl flex flex-col relative overflow-hidden">
                 <div class="absolute -right-4 -bottom-4 text-8xl text-white/5 opacity-20"><i class="fa-solid fa-satellite-dish"></i></div>
-                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4 relative z-10">最後同步</span>
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4 relative z-10">作品數據同步</span>
                 <div id="kpi-sync" class="text-lg md:text-2xl font-bold text-white mt-auto relative z-10 tracking-widest uppercase">Syncing...</div>
             </div>
         </section>
 
+        <!-- 趨勢圖表 -->
         <section class="bg-white p-8 md:p-16 rounded-[3.5rem] border border-slate-100 shadow-sm mb-24 animate-fade-up">
             <h2 class="text-3xl font-black text-slate-900 font-serif-tc mb-12 tracking-tight flex items-center">
                 <span class="w-3 h-10 bg-orange-500 rounded-full mr-6"></span> 點閱成長軌跡
@@ -150,6 +172,7 @@
             <div class="h-[300px] md:h-[450px] w-full"><canvas id="mainChart"></canvas></div>
         </section>
 
+        <!-- 精選作品集 -->
         <section id="portfolio" class="scroll-mt-32 animate-fade-up">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                 <div>
@@ -162,16 +185,61 @@
                 </div>
             </div>
             
-            <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                </div>
+            <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
         </section>
-
     </main>
 
-    <footer class="text-center py-20 border-t border-slate-100 mt-20 text-slate-300 font-black text-[10px] tracking-[0.5em] uppercase">
-        © 2026 無需多言 靜待花開 · Logic Crafted Visualization
-    </footer>
+    <!-- ================= 不蒜子 (Busuanzi) 全球遙測面板 ================= -->
+    <footer class="bg-slate-900 mt-20 pt-16 pb-12 border-t-[6px] border-orange-500 relative overflow-hidden">
+        <!-- 背景裝飾 -->
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNykiLz48L3N2Zz4=')]"></div>
+        
+        <div class="max-w-[1400px] mx-auto px-6 relative z-10">
+            <h3 class="text-slate-500 text-xs font-black tracking-[0.4em] uppercase mb-10 text-center flex items-center justify-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                Busuanzi Telemetry System
+            </h3>
+            
+            <!-- 數據區 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
+                
+                <!-- Site UV (獨立訪客) -->
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fa-solid fa-users text-3xl text-orange-400 mb-4 opacity-80"></i>
+                    <span class="text-slate-400 text-[10px] font-black tracking-widest uppercase mb-2">本站總訪客數 (UV)</span>
+                    <div class="text-4xl font-black text-white tracking-tighter">
+                        <span id="busuanzi_value_site_uv" class="busuanzi_value">...</span>
+                    </div>
+                </div>
 
+                <!-- Site PV (總瀏覽量) -->
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fa-solid fa-chart-line text-3xl text-blue-400 mb-4 opacity-80"></i>
+                    <span class="text-slate-400 text-[10px] font-black tracking-widest uppercase mb-2">本站總訪問量 (PV)</span>
+                    <div class="text-4xl font-black text-white tracking-tighter">
+                        <span id="busuanzi_value_site_pv" class="busuanzi_value">...</span>
+                    </div>
+                </div>
+
+                <!-- Page PV (單頁瀏覽量) -->
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fa-solid fa-file-lines text-3xl text-green-400 mb-4 opacity-80"></i>
+                    <span class="text-slate-400 text-[10px] font-black tracking-widest uppercase mb-2">本儀表板點閱數</span>
+                    <div class="text-4xl font-black text-white tracking-tighter">
+                        <span id="busuanzi_value_page_pv" class="busuanzi_value">...</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="text-center text-slate-500 font-black text-[9px] md:text-[10px] tracking-[0.5em] uppercase">
+                © 2026 無需多言 靜待花開 · Logic Crafted Visualization
+            </p>
+        </div>
+    </footer>
+    <!-- ========================================================================= -->
+
+    <!-- 深度分析 Modal -->
     <div id="analysisModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xl flex items-center justify-center p-4 md:p-10 opacity-0 transition-all duration-500">
         <div class="bg-white rounded-[3.5rem] shadow-2xl w-full max-w-7xl overflow-y-auto md:overflow-hidden transform scale-95 opacity-0 transition-all duration-500 flex flex-col lg:flex-row max-h-[92vh] md:max-h-[85vh]" id="modalContent">
             
