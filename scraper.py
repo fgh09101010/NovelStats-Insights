@@ -42,11 +42,21 @@ class PenanaPortfolioScraper:
                 title_tag = story.select_one('.newBookTitle')
                 title = title_tag.text.strip() if title_tag else "未知標題"
                 
-                # 2. 觀看數 (校準版)
+                # 2. 觀看數 (校準版) - 支援 K 與 M 單位轉換
                 try:
                     views_ele = story.select_one('.newBkwords')
-                    views = int(views_ele.text.strip().replace(',', '')) if views_ele else 0
-                except:
+                    if views_ele:
+                        views_text = views_ele.text.strip().upper() # 轉大寫防呆
+                        if 'K' in views_text:
+                            views = int(float(views_text.replace('K', '')) * 1000)
+                        elif 'M' in views_text:
+                            views = int(float(views_text.replace('M', '')) * 1000000)
+                        else:
+                            views = int(views_text.replace(',', ''))
+                    else:
+                        views = 0
+                except Exception as e:
+                    print(f"⚠️ 觀看數解析失敗: {e}")
                     views = 0
                 
                 # 3. 圖片連結 (從 style="background-image: url('...');" 提取)
