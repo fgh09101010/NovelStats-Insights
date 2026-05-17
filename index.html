@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;700;900&display=swap');
         
@@ -61,6 +64,32 @@
 
         /* 隱藏不蒜子預設的載入文字，我們用自定義樣式 */
         .busuanzi_value { display: inline-block; min-width: 20px; }
+
+
+        @keyframes pinboardIn {
+            0% { opacity: 0; transform: scale(0.6) rotate(calc(var(--r-deg) * 1.8)); filter: blur(8px); }
+            100% { opacity: 1; transform: scale(1) rotate(var(--r-deg)); }
+        }
+        @keyframes pinboardOut {
+            0% { opacity: 1; transform: scale(1) rotate(var(--r-deg)); max-height: 300px; opacity: 1; }
+            100% { opacity: 0; transform: scale(0.4) rotate(calc(var(--r-deg) * -1.5)); max-height: 0; padding: 0; margin: 0; border: none; }
+        }
+        @keyframes individualFloat {
+            0%, 100% { transform: translateY(0px) rotate(var(--r-deg)); }
+            50% { transform: translateY(var(--f-y)) rotate(calc(var(--r-deg) + var(--r-offset))); }
+        }
+        .animate-nebula-in {
+            animation: pinboardIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        .animate-nebula-out {
+            animation: pinboardOut 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) forwards !important;
+            overflow: hidden;
+        }
+        .nebula-node {
+            animation: individualFloat var(--f-dur) ease-in-out infinite;
+            transform-origin: center center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-orange-100">
@@ -186,6 +215,47 @@
             
             <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
         </section>
+        <!-- ================= 酷炫留言板區塊 ================= -->
+        <section id="comments-section" class="mt-32 animate-fade-up scroll-mt-32" style="animation-delay: 300ms;">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div>
+                    <h2 class="text-5xl font-black text-slate-900 font-serif-tc tracking-tight mb-4 text-center md:text-left">花開留聲機</h2>
+                    <p class="text-slate-400 text-base font-bold tracking-widest uppercase text-center md:text-left">Leave a Spark · No Name Required</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                <!-- 左側：發射輸入區 (不需輸入名字) -->
+                <div class="lg:col-span-5 bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-100 shadow-xl relative overflow-hidden group">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl group-hover:bg-orange-500/20 transition-all duration-700"></div>
+                    <h3 class="text-xl font-black text-slate-800 mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-wand-magic-sparkles text-orange-500 animate-pulse"></i> 投遞你的奇思妙想(但作者不會看)
+                    </h3>
+                    <div class="relative mb-6">
+                        <textarea id="commentInput" rows="4" maxlength="50" placeholder="說點什麼吧...不需要名字，只有靈魂的碰撞 ✨" 
+                            class="w-full bg-slate-50 border-2 border-slate-100 rounded-3xl p-6 font-bold text-slate-700 outline-none transition-all duration-300 resize-none focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 text-base leading-relaxed"
+                        ></textarea>
+                        <div class="absolute bottom-4 right-5 text-xs font-black text-slate-400 tracking-wider" id="charCount">0 / 50</div>
+                    </div>
+                    <button onclick="submitComment()" class="w-full py-5 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:from-orange-500 hover:to-orange-600 transition-all duration-300 shadow-xl shadow-slate-900/10 hover:shadow-orange-500/20 active:scale-[0.98]">
+                        <i class="fa-solid fa-paper-plane"></i> 發射留言
+                    </button>
+                </div>
+                
+                <!-- 右側：動態展示區 -->
+                <div class="lg:col-span-7 min-h-[540px] bg-slate-950/[0.01] rounded-[3rem] border border-slate-200/60 shadow-inner relative flex flex-col p-6 md:p-8" id="commentCanvas">
+                    <!-- 背景科技感網格 -->
+                    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.01)_1px,transparent_1px)] bg-[size:24px_24px] rounded-[3rem] pointer-events-none"></div>
+                    
+                    <div id="no-comment-tips" class="text-center text-slate-300 font-black text-lg tracking-widest my-auto pointer-events-none transition-all duration-500">
+                        🍃 星雲沉寂中，投遞第一道腦洞波長...
+                    </div>
+                    
+                    <!-- 核心拼接沙盒：電腦端雙列交錯，手機端單列安全排列 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 pointer-events-auto relative z-10" id="canvasContainer"></div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- ================= 不蒜子 (Busuanzi) 全球遙測面板 ================= -->
@@ -269,7 +339,162 @@
         </div>
     </div>
 
+    
     <script>
+        // ================= Firebase 雲端即時留言板（嚴格上限版） =================
+        const DISPLAY_LIMIT = 6; // 👈 畫布上維持最新 6 則留言
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC2WbAkhhDOZBU5lu3DJ5K2zUO6EXKTgUA",
+            authDomain: "novelstats-insights.firebaseapp.com",
+            projectId: "novelstats-insights",
+            storageBucket: "novelstats-insights.firebasestorage.app",
+            messagingSenderId: "66368568971",
+            appId: "1:66368568971:web:3d939e44ee27f9dbc3de8e",
+            measurementId: "G-081M7Q3QCJ"
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+
+        const avatarGradients = [
+            'from-orange-400 to-rose-500', 'from-blue-400 to-indigo-600',
+            'from-emerald-400 to-teal-600', 'from-violet-400 to-purple-600',
+            'from-fuchsia-400 to-pink-600'
+        ];
+        let isFirstLoad = true;
+
+        function formatFirebaseDate(timestamp) {
+            if (!timestamp) return "剛剛";
+            const date = timestamp.toDate();
+            return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+        }
+
+        // 雲端遙測即時監聽
+        function initRealtimeComments() {
+            const container = document.getElementById('canvasContainer');
+            const tips = document.getElementById('no-comment-tips');
+            if (!container) return;
+
+            db.collection('comments')
+              .orderBy('timestamp', 'desc')
+              .limit(DISPLAY_LIMIT)
+              .onSnapshot((snapshot) => {
+                  if (isFirstLoad) {
+                      if (snapshot.empty) {
+                          if (tips) tips.classList.remove('hidden');
+                      } else {
+                          if (tips) tips.remove();
+                          container.innerHTML = snapshot.docs.map(doc => renderCommentCard(doc.id, doc.data(), false)).join('');
+                      }
+                      isFirstLoad = false;
+                  } else {
+                      snapshot.docChanges().forEach((change) => {
+                          if (change.type === "added") {
+                              const existingTips = document.getElementById('no-comment-tips');
+                              if (existingTips) existingTips.remove();
+
+                              const tempDiv = document.createElement('div');
+                              tempDiv.innerHTML = renderCommentCard(change.doc.id, change.doc.data(), true);
+                              // 讓新留言優雅滑入網格的最前面
+                              container.insertBefore(tempDiv.firstElementChild, container.firstChild);
+                          }
+                          // 超出上限時，最舊的留言觸發「超維度縮小湮滅」
+                          if (change.type === "removed") {
+                              const oldNode = document.getElementById(change.doc.id);
+                              if (oldNode) {
+                                  oldNode.classList.add('animate-nebula-out');
+                                  setTimeout(() => { oldNode.remove(); }, 450);
+                              }
+                          }
+                      });
+                  }
+              }, (error) => {
+                  console.error("Firestore 遙測中斷:", error);
+              });
+        }
+        function renderCommentCard(docId, data, isNew = false) {
+            // 使用 ID 計算出的數學雜湊值調配每張卡片的專屬物理屬性
+            const hash = docId.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            
+            // 隨機斜切傾斜角度 (-5度 ~ +6度)
+            const rotate = -5 + (hash % 12);      
+            
+            // 獨立的輕柔浮動屬性
+            const duration = 5 + (hash % 4);       // 漂浮週期 5s ~ 8s
+            const floatY = -8 - (hash % 12);       // 垂直漂移幅度 -8px ~ -20px
+            const rOffset = -2 + (hash % 5);       // 微自轉扭曲變量 -2deg ~ 2deg
+            
+            const gradient = avatarGradients[hash % avatarGradients.length];
+            const animationClass = isNew ? 'animate-nebula-in' : '';
+            const displayTime = formatFirebaseDate(data.timestamp);
+
+            // 將亂數封裝進 CSS 變數驅動核心動畫
+            const inlineStyles = `
+                --r-deg: ${rotate}deg; 
+                --f-dur: ${duration}s; 
+                --f-y: ${floatY}px; 
+                --r-offset: ${rOffset}deg;
+            `;
+
+            return `
+                <div id="${docId}" class="nebula-node bg-white p-6 rounded-[2.2rem] border border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-orange-500/10 hover:border-orange-300 hover:scale-[1.03] active:scale-95 transition-all duration-300 group ${animationClass}" style="${inlineStyles}">
+                    <div class="absolute inset-0 bg-gradient-to-br ${gradient} opacity-[0.01] group-hover:opacity-[0.05] transition-opacity rounded-[2.2rem] pointer-events-none"></div>
+                    <div class="flex items-start gap-4">
+                        <!-- 量子動態高光粒子 -->
+                        <div class="w-7 h-7 rounded-xl bg-gradient-to-br ${gradient} text-white flex items-center justify-center shadow-md shrink-0 mt-0.5">
+                            <i class="fa-solid fa-bolt text-[9px] animate-pulse"></i>
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <!-- 💡 內文顏色從 text-slate-600 增強為 text-slate-800，字體更清晰醒目 -->
+                            <p class="text-slate-800 font-bold text-sm leading-relaxed font-serif-tc break-words select-text pr-1">${data.text}</p>
+                            <div class="flex items-center justify-between mt-3 pt-2 border-t border-slate-100">
+                                <!-- 💡 時間顏色從 text-slate-300 增強為 text-slate-500，稍微放大至 text-[10px] 提升易讀性 -->
+                                <span class="text-[10px] font-bold text-slate-500 tracking-widest uppercase"><i class="fa-regular fa-clock mr-1"></i> ${displayTime}</span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-gradient-to-br ${gradient} opacity-40 group-hover:opacity-100 transition-opacity"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitComment() {
+            const input = document.getElementById('commentInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            db.collection('comments').add({
+                text: text,
+                timestamp: new Date()
+            })
+            .then(() => {
+                input.value = '';
+                document.getElementById('charCount').innerText = '0 / 200';
+                if (navigator.vibrate) navigator.vibrate(20);
+            })
+            .catch((err) => {
+                console.error("發射思維粒子失敗: ", err);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('commentInput');
+            if(input) {
+                input.addEventListener('input', function() {
+                    document.getElementById('charCount').innerText = `${this.value.length} / 200`;
+                });
+            }
+        });
+
+
+
+
+
+
+
         let globalHistory = [];
         let latestWorks = [];
         let modalChartInstance = null;
@@ -293,6 +518,7 @@
                     latestWorks = latest.works;
                     updateKPIs(latest);
                     setTimeout(() => { renderMainChart(globalHistory); filterAndSortWorks(); }, 500);
+                    initRealtimeComments();
                 }
             } catch (e) { console.error("載入失敗", e); }
         }
