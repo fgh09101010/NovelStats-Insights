@@ -3,8 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import os
 import re
-from datetime import datetime
-
+from datetime import datetime, timedelta
 class PenanaPortfolioScraper:
     def __init__(self, target_url):
         self.url = target_url
@@ -102,8 +101,10 @@ class PenanaPortfolioScraper:
                 except:
                     history = []
 
+        tz_utc8 = datetime.now() + timedelta(hours=8)
+
         entry = {
-            "update_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "update_time": tz_utc8.strftime("%Y-%m-%d %H:%M:%S"),
             "works": new_stats
         }
         history.append(entry)

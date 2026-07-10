@@ -609,10 +609,15 @@
             const tagContainer = document.getElementById('modal-tags');
             tagContainer.innerHTML = bookInfo.tags.map(t => `<span class="px-4 py-1.5 bg-white text-slate-500 text-xs font-bold rounded-xl border border-slate-100">#${t}</span>`).join('');
 
-            const historyLabels = globalHistory.slice(-20).map(h => h.update_time.split(' ')[0].slice(5).replace('-', '/'));
-            const historyData = globalHistory.slice(-20).map(h => {
+            const historyLabels = [];
+            const historyData = [];
+
+            globalHistory.forEach(h => {
                 const w = h.works.find(work => work.id === bookId);
-                return w ? w.views : null;
+                if (w) { 
+                    historyLabels.push(h.update_time.split(' ')[0].slice(5).replace('-', '/'));
+                    historyData.push(w.views);
+                }
             });
 
             if(modalChartInstance) modalChartInstance.destroy();
@@ -663,9 +668,11 @@
         document.getElementById('analysisModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
         function renderMainChart(history) {
-            const displaySet = history.slice(-20);
+            // 🛠️ 1. 拿掉 .slice(-20)，直接使用完整的 history 數據
+            const displaySet = history; 
             const labels = displaySet.map(h => h.update_time.split(' ')[0].slice(5).replace('-', '/'));
             const data = displaySet.map(h => h.works.reduce((s, w) => s + w.views, 0));
+            
             if(mainChartInstance) mainChartInstance.destroy();
             const ctx = document.getElementById('mainChart').getContext('2d');
             let gradient = ctx.createLinearGradient(0, 0, 0, 450);
@@ -678,9 +685,26 @@
                     labels: labels,
                     datasets: [{ label: '全網點閱', data: data, borderColor: '#0f172a', borderWidth: 5, tension: 0.4, fill: true, backgroundColor: gradient, pointRadius: 0, pointHoverRadius: 8, pointBackgroundColor: '#fff', pointBorderColor: '#0f172a', pointBorderWidth: 3 }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 2000, easing: 'easeOutExpo' }, interaction: { mode: 'index', intersect: false }, plugins: { legend: { display: false } },
-                    scales: { x: { grid: { display: false }, ticks: { font: { weight: 'bold' } } },
-                        y: { border: { display: false }, grid: { color: '#f8fafc', borderDash: [6, 6] }, ticks: { font: { weight: 'bold' } } } }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    animation: { duration: 2000, easing: 'easeOutExpo' }, 
+                    interaction: { mode: 'index', intersect: false }, 
+                    plugins: { legend: { display: false } },
+                    scales: { 
+                        x: { 
+                            grid: { display: false }, 
+                            // 🛠️ 2. 優化 Ticks 設定，讓時間軸標籤自動調整間隔
+                            ticks: { 
+                                font: { weight: 'bold' },
+                                autoSkip: true,       // 啟動自動跳過密集標籤的功能
+                                maxTicksLimit: 10,    // 限制畫面上最多顯示 10 個日期標籤（可依喜好調整，改 8 或 12 都可以）
+                                maxRotation: 0,       // 限制字體不要斜著長，維持水平比較美觀
+                                minRotation: 0
+                            } 
+                        },
+                        y: { border: { display: false }, grid: { color: '#f8fafc', borderDash: [6, 6] }, ticks: { font: { weight: 'bold' } } } 
+                    }
                 }
             });
         }
