@@ -6,6 +6,7 @@
     
     <title>無需多言 靜待花開</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+    
     <!-- ================= GA4 專業流量追蹤代碼 ================= -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFPGEY1WFF"></script>
     <script>
@@ -14,7 +15,6 @@
       gtag('js', new Date());
       gtag('config', 'G-CFPGEY1WFF');
     </script>
-    <!-- ========================================================= -->
 
     <!-- ================= 不蒜子 (Busuanzi) 計數器腳本 ================= -->
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -29,86 +29,120 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;700;900&display=swap');
         
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #fafaf9; color: #1c1917; overflow-x: hidden; -webkit-tap-highlight-color: transparent;}
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            background-color: #fafaf9; 
+            /* 微弱的點狀背景紋理提升質感 */
+            background-image: radial-gradient(#e7e5e4 1px, transparent 1px);
+            background-size: 24px 24px;
+            color: #1c1917; 
+            overflow-x: hidden; 
+            -webkit-tap-highlight-color: transparent;
+        }
         .font-serif-tc { font-family: 'Noto Serif TC', serif; }
 
-        .glass-nav { background: rgba(250, 250, 249, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .glass-card { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.06); }
+        /* 優化毛玻璃效果 */
+        .glass-nav { 
+            background: rgba(250, 250, 249, 0.7); 
+            backdrop-filter: blur(24px); 
+            -webkit-backdrop-filter: blur(24px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 1); 
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.5); 
+        }
 
         .fixed-cover { aspect-ratio: 2 / 1; width: 100%; object-fit: cover; object-position: center; }
 
-        .portal-scroll { max-height: 420px; overflow-y: auto; padding-right: 4px; }
-        .portal-scroll::-webkit-scrollbar { width: 3px; }
-        .portal-scroll::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 10px; }
+        .portal-scroll { max-height: 420px; overflow-y: auto; padding-right: 8px; }
+        .portal-scroll::-webkit-scrollbar { width: 4px; }
+        .portal-scroll::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 10px; }
 
-        .hover-card { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        /* 卡片懸浮動畫升級 */
+        .hover-card { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         @media (hover: hover) {
-            .hover-card:hover { transform: translateY(-10px); box-shadow: 0 40px 80px -15px rgba(249, 115, 22, 0.15); }
+            .hover-card:hover { 
+                transform: translateY(-8px) scale(1.01); 
+                box-shadow: 0 30px 60px -15px rgba(249, 115, 22, 0.12), 0 20px 30px -10px rgba(0, 0, 0, 0.05); 
+                border-color: rgba(249, 115, 22, 0.2);
+            }
         }
 
-        .btn-platform { transition: all 0.3s ease; background: white; border: 1px solid rgba(0,0,0,0.05); }
-        .btn-platform:hover { border-color: #f97316; transform: translateX(4px); }
+        .btn-platform { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0,0,0,0.03); }
+        .btn-platform:hover { border-color: #f97316; transform: translateX(6px); background: #ffffff; box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.1); }
 
         .number-display { line-height: 1.1 !important; padding-bottom: 0.1em; }
 
-        @keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.15); opacity: 0.5; } }
-        .bg-glow-1 { animation: pulseGlow 12s ease-in-out infinite; }
-        .bg-glow-2 { animation: pulseGlow 16s ease-in-out infinite reverse; }
+        /* 背景光暈顏色與速度微調 */
+        @keyframes pulseGlow { 0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.4; } 50% { transform: scale(1.1) translate(2%, 2%); opacity: 0.6; } }
+        .bg-glow-1 { animation: pulseGlow 15s ease-in-out infinite; mix-blend-mode: multiply; }
+        .bg-glow-2 { animation: pulseGlow 18s ease-in-out infinite reverse; mix-blend-mode: multiply; }
 
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-up { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
 
-        ::-webkit-scrollbar { width: 5px; }
+        /* 全局滾動條美化 */
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-        /* 隱藏不蒜子預設的載入文字，我們用自定義樣式 */
-        .busuanzi_value { display: inline-block; min-width: 20px; }
+        .busuanzi_value { display: inline-block; min-width: 20px; font-variant-numeric: tabular-nums; }
 
-
+        /* 留言板動畫保留並優化 */
         @keyframes pinboardIn {
-            0% { opacity: 0; transform: scale(0.6) rotate(calc(var(--r-deg) * 1.8)); filter: blur(8px); }
-            100% { opacity: 1; transform: scale(1) rotate(var(--r-deg)); }
+            0% { opacity: 0; transform: scale(0.8) translateY(20px) rotate(calc(var(--r-deg) * 2)); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0) rotate(var(--r-deg)); filter: blur(0); }
         }
         @keyframes pinboardOut {
-            0% { opacity: 1; transform: scale(1) rotate(var(--r-deg)); max-height: 300px; opacity: 1; }
-            100% { opacity: 0; transform: scale(0.4) rotate(calc(var(--r-deg) * -1.5)); max-height: 0; padding: 0; margin: 0; border: none; }
+            0% { opacity: 1; transform: scale(1) rotate(var(--r-deg)); max-height: 300px; }
+            100% { opacity: 0; transform: scale(0.6) rotate(calc(var(--r-deg) * -2)); max-height: 0; padding: 0; margin: 0; border: none; filter: blur(5px); }
         }
         @keyframes individualFloat {
             0%, 100% { transform: translateY(0px) rotate(var(--r-deg)); }
             50% { transform: translateY(var(--f-y)) rotate(calc(var(--r-deg) + var(--r-offset))); }
         }
-        .animate-nebula-in {
-            animation: pinboardIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-        .animate-nebula-out {
-            animation: pinboardOut 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) forwards !important;
-            overflow: hidden;
-        }
+        .animate-nebula-in { animation: pinboardIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .animate-nebula-out { animation: pinboardOut 0.6s cubic-bezier(0.36, 0, 0.66, -0.56) forwards !important; overflow: hidden; }
         .nebula-node {
             animation: individualFloat var(--f-dur) ease-in-out infinite;
             transform-origin: center center;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* 文字漸層特效 */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(135deg, #0f172a 0%, #334155 100%);
         }
     </style>
 </head>
-<body class="antialiased selection:bg-orange-100">
+<body class="antialiased selection:bg-orange-200 selection:text-orange-900">
 
-    <div class="fixed inset-0 pointer-events-none -z-10">
-        <div class="absolute top-[-10%] right-[-10%] w-[80vw] md:w-[60vw] h-[80vw] md:h-[60vw] bg-orange-100/50 rounded-full blur-[100px] md:blur-[140px] bg-glow-1"></div>
-        <div class="absolute bottom-[-10%] left-[-10%] w-[70vw] md:w-[50vw] h-[70vw] md:h-[50vw] bg-blue-50/50 rounded-full blur-[100px] md:blur-[140px] bg-glow-2"></div>
+    <!-- 背景動態光暈 -->
+    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+        <div class="absolute top-[-15%] right-[-10%] w-[90vw] md:w-[60vw] h-[90vw] md:h-[60vw] bg-orange-200/40 rounded-full blur-[120px] md:blur-[160px] bg-glow-1"></div>
+        <div class="absolute bottom-[-10%] left-[-15%] w-[80vw] md:w-[50vw] h-[80vw] md:h-[50vw] bg-sky-200/40 rounded-full blur-[120px] md:blur-[160px] bg-glow-2"></div>
     </div>
 
+    <!-- 頂部導航列 -->
     <nav class="fixed top-0 w-full z-40 glass-nav">
-        <div class="max-w-[1400px] mx-auto px-6 md:px-12 py-4 md:py-6 flex justify-between items-center">
-            <a href="#" class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center shadow-lg"><i class="fa-solid fa-seedling text-orange-400"></i></div>
-                <span class="font-black tracking-tighter text-xl md:text-2xl text-slate-800 font-serif-tc">無需多言 靜待花開</span>
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12 py-4 md:py-5 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="https://static2.penana.com/fit-in/280x280/images/users/large/10/22/102230116969d2f9e99aa9b5.85856472-340930.png" class="w-10 h-10 rounded-xl object-cover shadow-lg group-hover:shadow-orange-500/20 transition-all duration-300 transform group-hover:-translate-y-0.5">
+                <span class="font-black tracking-widest text-xl md:text-2xl text-slate-800 font-serif-tc group-hover:text-orange-600 transition-colors">無需多言 靜待花開</span>
             </a>
             <div class="hidden md:flex items-center gap-8 text-xs font-black tracking-widest text-slate-400 uppercase">
-                <a href="#stats" class="hover:text-orange-500 transition">數據趨勢</a>
-                <a href="#portfolio" class="hover:text-orange-500 transition">作品目錄</a>
-                <a href="https://www.threads.net/@fgh09202020" target="_blank" class="px-5 py-2 bg-slate-900 text-white rounded-full hover:bg-orange-500 transition-all">社群</a>
+                <a href="#stats" class="hover:text-orange-500 transition-colors">數據趨勢</a>
+                <a href="#portfolio" class="hover:text-orange-500 transition-colors">作品目錄</a>
+                <a href="https://www.threads.net/@fgh09202020" target="_blank" class="px-6 py-2.5 bg-slate-900 text-white rounded-full hover:bg-orange-500 transition-all shadow-md hover:shadow-orange-500/30 hover:-translate-y-0.5">社群</a>
             </div>
             <div class="md:hidden">
                 <a href="https://www.threads.net/@fgh09202020" target="_blank" class="w-10 h-10 flex items-center justify-center bg-slate-900 text-white rounded-full shadow-md active:scale-95 transition-transform"><i class="fa-brands fa-threads"></i></a>
@@ -116,56 +150,71 @@
         </div>
     </nav>
 
-    <main class="max-w-[1400px] mx-auto px-6 md:px-12 pt-32 md:pt-48 pb-20">
+    <main class="max-w-[1400px] mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-20">
         
+        <!-- Hero 區塊 -->
         <section class="grid grid-cols-1 xl:grid-cols-12 gap-8 mb-24 items-stretch animate-fade-up">
             
-            <div class="xl:col-span-8 bg-white rounded-[3rem] p-10 md:p-20 shadow-sm border border-slate-100 relative overflow-hidden flex flex-col justify-center">
+            <div class="xl:col-span-8 glass-card rounded-[3rem] p-10 md:p-16 lg:p-20 relative overflow-hidden flex flex-col justify-center">
                 <div class="relative z-10">
-                    <h1 class="text-5xl md:text-[5.5rem] font-black text-slate-900 tracking-tighter mb-8 font-serif-tc leading-[1.1]">無需多言<br>靜待花開</h1>
+                    <!-- 修改後 -->
+                    <div class="flex items-center gap-6 mb-8">
+                        <img src="https://static2.penana.com/fit-in/280x280/images/users/large/10/22/102230116969d2f9e99aa9b5.85856472-340930.png" class="w-20 h-20 md:w-28 md:h-28 rounded-full border-4 border-white shadow-xl object-cover flex-shrink-0">
+                        <h1 class="text-5xl md:text-[5.5rem] lg:text-[6.5rem] font-black text-gradient tracking-tighter font-serif-tc leading-[1.05] drop-shadow-sm m-0">無需多言<br>靜待花開</h1>
+                    </div>
                     
                     <div class="flex items-center gap-4 mb-12">
-                        <span class="px-6 py-2 bg-orange-500 text-white text-xs font-black tracking-widest rounded-full shadow-xl shadow-orange-100">故事加工中</span>
-                        <div class="h-1 w-12 bg-slate-100 rounded-full"></div>
-                        <span class="text-slate-400 font-bold text-sm tracking-widest uppercase italic">Novelist × Developer</span>
+                        <span class="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-400 text-white text-xs font-black tracking-widest rounded-full shadow-lg shadow-orange-500/20">故事加工中</span>
+                        <div class="h-1 w-12 bg-slate-200 rounded-full"></div>
+                        <span class="text-slate-400 font-bold text-sm tracking-[0.2em] uppercase italic">Novelist × Developer</span>
                     </div>
 
                     <div class="flex flex-wrap gap-4 mb-12">
-                        <div class="px-5 py-2.5 bg-green-50 rounded-2xl text-xs font-bold text-green-700 border border-green-100">🔋 當前電量：100%</div>
-                        <div class="px-5 py-2.5 bg-amber-50 rounded-2xl text-xs font-bold text-amber-700 border border-amber-100">☕ 驅動來源：咖啡</div>
-                        <div class="px-5 py-2.5 bg-rose-50 rounded-2xl text-xs font-bold text-rose-700 border border-rose-100">❤️ 核心成分：熱愛</div>
+                        <div class="px-5 py-2.5 bg-white/80 backdrop-blur rounded-2xl text-xs font-bold text-slate-600 border border-slate-200/60 shadow-sm flex items-center gap-2">
+                            <span class="text-green-500 animate-pulse"><i class="fa-solid fa-battery-full"></i></span> 當前電量：100%
+                        </div>
+                        <div class="px-5 py-2.5 bg-white/80 backdrop-blur rounded-2xl text-xs font-bold text-slate-600 border border-slate-200/60 shadow-sm flex items-center gap-2">
+                            <span class="text-amber-600"><i class="fa-solid fa-mug-hot"></i></span> 驅動來源：咖啡
+                        </div>
+                        <div class="px-5 py-2.5 bg-white/80 backdrop-blur rounded-2xl text-xs font-bold text-slate-600 border border-slate-200/60 shadow-sm flex items-center gap-2">
+                            <span class="text-rose-500"><i class="fa-solid fa-heart"></i></span> 核心成分：熱愛
+                        </div>
                     </div>
 
-                    <div class="max-w-3xl border-l-4 border-orange-400 pl-8">
-                        <p class="text-2xl md:text-3xl font-bold text-slate-800 leading-relaxed mb-4 font-serif-tc">「專職在空白頁面上，進行無邊際的腦洞實驗。」</p>
-                        <p class="text-base md:text-lg text-slate-500 leading-relaxed tracking-wide italic">這裡沒有標準答案，只有被咖啡點燃的各種可能。</p>
+                    <div class="max-w-3xl border-l-4 border-orange-400 pl-8 py-2 relative">
+                        <div class="absolute -left-3 -top-3 text-orange-200 text-4xl opacity-50 font-serif"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="text-2xl md:text-3xl font-bold text-slate-800 leading-relaxed mb-4 font-serif-tc relative z-10">「專職在空白頁面上，進行無邊際的腦洞實驗。」</p>
+                        <p class="text-base md:text-lg text-slate-500 leading-relaxed tracking-wider italic">這裡沒有標準答案，只有被咖啡點燃的各種可能。</p>
                     </div>
                 </div>
-                <i class="fa-solid fa-feather absolute -bottom-10 -right-10 md:-bottom-20 md:-right-20 text-[18rem] md:text-[28rem] text-slate-50/80 pointer-events-none transform -rotate-12"></i>
+                <!-- 裝飾羽毛 -->
+                <i class="fa-solid fa-feather absolute -bottom-10 -right-10 md:-bottom-20 md:-right-20 text-[18rem] md:text-[32rem] text-slate-900/[0.03] pointer-events-none transform -rotate-12 transition-transform hover:rotate-0 duration-1000"></i>
             </div>
 
+            <!-- 右側連結門 -->
             <div class="xl:col-span-4 glass-card rounded-[3rem] p-10 flex flex-col animate-fade-up" style="animation-delay: 150ms">
-                <h3 class="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8"><i class="fa-solid fa-link mr-2"></i> 跨平台傳送門</h3>
+                <h3 class="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8 flex items-center"><i class="fa-solid fa-link mr-3 text-slate-300"></i> 跨平台傳送門</h3>
                 <div class="portal-scroll space-y-4">
                     <a href="https://www.penana.com/user/340930" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="https://static2.penana.com/img/logo_new.svg" class="w-7 h-7 object-contain"> Penana</div>
-                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-orange-500"></i>
+                        <div class="flex items-center gap-4 font-bold text-slate-700">
+                            <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center group-hover:bg-orange-100 transition-colors"><img src="https://static2.penana.com/img/logo_new.svg" class="w-6 h-6 object-contain"></div> 
+                            Penana
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-orange-500 transition-transform group-hover:translate-x-1"></i>
                     </a>
                     <a href="https://cxc.today/zh/@bloom_in_silence" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700"><div class="w-7 h-7 flex items-center justify-center bg-blue-50 text-blue-500 text-[10px] rounded-lg font-black">CXC</div> CXC 創作者俱樂部</div>
-                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-blue-500"></i>
-                    </a>
-                    <a href="https://www.popo.tw/users/fgh09101010" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="https://cdn0.popo.tw/web1/images/logo.png" class="w-7 h-7 object-contain"> POPO 原創市集</div>
-                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-pink-500"></i>
-                    </a>
-                    <a href="https://www.kadokado.com.tw/user/283023" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADmklEQVR4AbzWA3BkTRiF4S/m2rbtMeIxYie/bdu2bdu2bds2173vrZpb1ZuNdaueZHzOVXdLdzZ13D6mTORCDP22JQLH4iIcgTT0a3gSDoXCbchCP4UDi/A5/kMVpD8LpON8KNyE3P7e+0L8ip/g2XDsPrJgVYlhDJZgIPqsQBZugcLpSK0sjhnhc/AYfsS1GIk+KZCBO/EG5vx/9F7m3h8FlbAaob4pAMzFDCQVeUJGeA7u1gr8hwJIn2+JvZ+MT7QCn2B6fxbw4R+twP3I6pUCB5dVyYk1tdl7RCsmnFJbl5sy2yUv7rWTHm44BEpzbK+EN/rjsnO4fESxN3Sh2xX8pNATumabQOkUlzMglzY3meFZuFULX4tIrxQI5UekoijWvMzqWzefH18ItzN4146h8kk+b8gsMAEfawU+x+xeKeDPC0tpYXT7pVbfBjNgkaVEFXhC1+0crRhkcwSMAsX4SyvwUK+d/zpfXHYMl0/0uIJPLzQDQKH14YLIseqG45J5vj+U5jX4kQvpUZH/j95TjL1s8McXulzBV/QSK23+3zg6dTy+AaqFP3EPyjEUgi4PNoMxWh27T1LQHZTqkrjDYvd/pgdZ7YEvllh8vySet+Z/PI5tMAZJ6FSBkbgWb6BMnXpAkrDFCqL1y22+v9oJ3AjVijV4BXtiKpLR7t7vhrVQ+ApFH+y/i5xSW5/OrXjmYouvrQJ343L80EaZ9XgPTUhGqwVm4j0ozUuYfscO28j2wbKpDmfgzTZ+vBYpsOAsfNlGkfcxGVuEp+AUqFacg/RVdr9ECyLbciesbvGj32IxJCEN83FMInA9VMKnmNFaARu+a6PAryh6j1Oxd7xyqMsZfEwvwGD1GhfpYK6RlvNEMqZjX7yAd7EH0rBZeA6uhWrHbcgyhuJYYbSBo7DGLED4V9uHyhbAzG+tyBCMREprex/H3x0U+A2eN/fdSfaMVox2OgOvmgWMC5PBaU/JXSxn1td3eaExGo9CdcKp6qlzRWSEMEkdpt8RjJgPMntm7RQu13+7Q8af/bGmkwVewagTqmul3hd3cc5/MwussPk/3DNWMfmgsio9fDFOx0W4UHMRzkNE+HMzVCd9iOmv77OT7Bopz2WvHzAmKAMX5kP7xisHcZHqBXaHaseDwh8rzsG1uKYdV6EB6WuO2Vtk2DKpKo4tLHCHzmVteF6Tv3SFjFgux1bV6gUmYyfs3opd4ZRNG2gwCgAaZrxRAt+CsAAAAABJRU5ErkJggg==" class="w-7 h-7 object-contain"> KadoKado 角角者</div>
-                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-green-500"></i>
+                        <div class="flex items-center gap-4 font-bold text-slate-700">
+                            <div class="w-10 h-10 flex items-center justify-center bg-blue-50 text-blue-600 text-xs rounded-xl font-black group-hover:bg-blue-100 transition-colors">CXC</div> 
+                            創作者俱樂部
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-blue-500 transition-transform group-hover:translate-x-1"></i>
                     </a>
                     <a href="https://www.threads.com/@fgh09202020" target="_blank" class="btn-platform flex items-center justify-between p-5 rounded-2xl group">
-                        <div class="flex items-center gap-4 font-bold text-slate-700"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABH0lEQVR4AbWSIYyDQBBFH17hmuAdSdW50zhsPR5bh0FiUCjU+gSFF7jVaCQGt4oE9S9Hk7LctbJPzsts5s8swWsA8CR77Z188k8C17xtywTgj4Ri0c7WXThLLqNkm7Ko+1XuBsEhYZT95oGRUk9Co4EnhWZ/snB1EZB1fR0DvUqOzrtaiEdJWnOINXudgxLIZfOs0RpDlXty3AASgEo1eNMSOAdAWhljZIEjJ6EmgE47a7NXz7LRXGZZtUnWfxa3AJOLgZsGq9rPOW27jIBeOesSnKKkYDQW915ziFV8WoKBYJCkKYHhJC/bGgG3uskBnAt5t/hW3ekqjBqvPOjkokPuUa0225bl77GXKycCqGY9MCEv+Lo3pkz5AIH3aeEHHHmiORlPs9IAAAAASUVORK5CYII=" class="w-7 h-7 object-contain"> Threads 日常</div>
-                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-slate-900"></i>
+                        <div class="flex items-center gap-4 font-bold text-slate-700">
+                            <div class="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center group-hover:bg-slate-200 transition-colors"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABH0lEQVR4AbWSIYyDQBBFH17hmuAdSdW50zhsPR5bh0FiUCjU+gSFF7jVaCQGt4oE9S9Hk7LctbJPzsts5s8swWsA8CR77Z188k8C17xtywTgj4Ri0c7WXThLLqNkm7Ko+1XuBsEhYZT95oGRUk9Co4EnhWZ/snB1EZB1fR0DvUqOzrtaiEdJWnOINXudgxLIZfOs0RpDlXty3AASgEo1eNMSOAdAWhljZIEjJ6EmgE47a7NXz7LRXGZZtUnWfxa3AJOLgZsGq9rPOW27jIBeOesSnKKkYDQW915ziFV8WoKBYJCkKYHhJC/bGgG3uskBnAt5t/hW3ekqjBqvPOjkokPuUa0225bl77GXKycCqGY9MCEv+Lo3pkz5AIH3aeEHHHmiORlPs9IAAAAASUVORK5CYII=" class="w-6 h-6 object-contain"></div> 
+                            Threads 日常
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-slate-200 group-hover:text-slate-900 transition-transform group-hover:translate-x-1"></i>
                     </a>
                 </div>
             </div>
@@ -173,29 +222,29 @@
 
         <!-- 數據卡片區 -->
         <section id="stats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 animate-fade-up scroll-mt-32">
-            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 flex flex-col group overflow-visible shadow-sm">
-                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4"><i class="fa-solid fa-eye text-orange-400 mr-2"></i>全網總點閱</span>
-                <div id="kpi-total" class="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
+            <div class="bg-white/80 backdrop-blur-xl p-8 lg:p-10 rounded-[2.5rem] border border-white shadow-sm flex flex-col group hover:shadow-lg transition-all duration-300">
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4 flex items-center"><i class="fa-solid fa-eye text-orange-400 mr-2 bg-orange-50 p-2 rounded-lg group-hover:scale-110 transition-transform"></i>全網總點閱</span>
+                <div id="kpi-total" class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
             </div>
-            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 flex flex-col group shadow-sm">
-                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4"><i class="fa-solid fa-book-open text-blue-400 mr-2"></i>連載作品數</span>
-                <div id="kpi-works" class="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
+            <div class="bg-white/80 backdrop-blur-xl p-8 lg:p-10 rounded-[2.5rem] border border-white shadow-sm flex flex-col group hover:shadow-lg transition-all duration-300">
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4 flex items-center"><i class="fa-solid fa-book-open text-blue-400 mr-2 bg-blue-50 p-2 rounded-lg group-hover:scale-110 transition-transform"></i>連載作品數</span>
+                <div id="kpi-works" class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
             </div>
-            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 flex flex-col group shadow-sm">
-                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4"><i class="fa-solid fa-chart-simple text-green-400 mr-2"></i>單本平均值</span>
-                <div id="kpi-avg" class="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
+            <div class="bg-white/80 backdrop-blur-xl p-8 lg:p-10 rounded-[2.5rem] border border-white shadow-sm flex flex-col group hover:shadow-lg transition-all duration-300">
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4 flex items-center"><i class="fa-solid fa-chart-simple text-green-400 mr-2 bg-green-50 p-2 rounded-lg group-hover:scale-110 transition-transform"></i>單本平均值</span>
+                <div id="kpi-avg" class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter mt-auto">0</div>
             </div>
-            <div class="bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl flex flex-col relative overflow-hidden">
-                <div class="absolute -right-4 -bottom-4 text-8xl text-white/5 opacity-20"><i class="fa-solid fa-satellite-dish"></i></div>
-                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4 relative z-10">作品數據同步</span>
+            <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-8 lg:p-10 rounded-[2.5rem] shadow-xl flex flex-col relative overflow-hidden group">
+                <div class="absolute -right-4 -bottom-4 text-8xl text-white opacity-5 group-hover:scale-110 transition-transform duration-700"><i class="fa-solid fa-satellite-dish"></i></div>
+                <span class="text-slate-400 text-xs font-black tracking-widest uppercase mb-4 relative z-10 flex items-center"><span class="w-2 h-2 rounded-full bg-green-400 animate-pulse mr-3"></span>作品數據同步</span>
                 <div id="kpi-sync" class="text-lg md:text-2xl font-bold text-white mt-auto relative z-10 tracking-widest uppercase">Syncing...</div>
             </div>
         </section>
 
         <!-- 趨勢圖表 -->
-        <section class="bg-white p-8 md:p-16 rounded-[3.5rem] border border-slate-100 shadow-sm mb-24 animate-fade-up">
-            <h2 class="text-3xl font-black text-slate-900 font-serif-tc mb-12 tracking-tight flex items-center">
-                <span class="w-3 h-10 bg-orange-500 rounded-full mr-6"></span> 點閱成長軌跡
+        <section class="glass-card p-8 md:p-12 lg:p-16 rounded-[3.5rem] mb-24 animate-fade-up">
+            <h2 class="text-3xl font-black text-slate-900 font-serif-tc mb-10 tracking-tight flex items-center">
+                <span class="w-3 h-10 bg-gradient-to-b from-orange-400 to-orange-600 rounded-full mr-5 shadow-sm"></span> 點閱成長軌跡
             </h2>
             <div class="h-[300px] md:h-[450px] w-full"><canvas id="mainChart"></canvas></div>
         </section>
@@ -204,145 +253,154 @@
         <section id="portfolio" class="scroll-mt-32 animate-fade-up">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                 <div>
-                    <h2 class="text-5xl font-black text-slate-900 font-serif-tc tracking-tight mb-4 text-center md:text-left">精選作品集</h2>
-                    <p class="text-slate-400 text-base font-bold tracking-widest uppercase text-center md:text-left">Curated Works & Insights</p>
+                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 font-serif-tc tracking-tight mb-3 text-center md:text-left">精選作品集</h2>
+                    <p class="text-slate-400 text-sm md:text-base font-bold tracking-[0.2em] uppercase text-center md:text-left">Curated Works & Insights</p>
                 </div>
                 <div class="relative w-full md:w-96 group">
                     <i class="fa-solid fa-magnifying-glass absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-orange-500 transition-colors"></i>
-                    <input type="text" id="searchInput" placeholder="搜尋作品名稱或標籤..." class="bg-white border border-slate-200 rounded-full pl-14 pr-6 py-4 font-bold focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none w-full shadow-sm transition-all" onkeyup="filterAndSortWorks()">
+                    <input type="text" id="searchInput" placeholder="搜尋作品名稱或標籤..." class="bg-white/80 backdrop-blur border border-slate-200/80 rounded-full pl-14 pr-6 py-4 font-bold focus:ring-4 focus:ring-orange-500/10 focus:border-orange-400 outline-none w-full shadow-sm hover:shadow-md transition-all text-slate-700" onkeyup="filterAndSortWorks()">
                 </div>
             </div>
             
-            <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
+            <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"></div>
         </section>
+
         <!-- ================= 酷炫留言板區塊 ================= -->
-        <section id="comments-section" class="mt-32 animate-fade-up scroll-mt-32" style="animation-delay: 300ms;">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+        <section id="comments-section" class="mt-32 animate-fade-up scroll-mt-32" style="animation-delay: 200ms;">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
                 <div>
-                    <h2 class="text-5xl font-black text-slate-900 font-serif-tc tracking-tight mb-4 text-center md:text-left">花開留聲機</h2>
-                    <p class="text-slate-400 text-base font-bold tracking-widest uppercase text-center md:text-left">Leave a Spark · No Name Required</p>
+                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 font-serif-tc tracking-tight mb-3 text-center md:text-left">花開留聲機</h2>
+                    <p class="text-slate-400 text-sm md:text-base font-bold tracking-[0.2em] uppercase text-center md:text-left">Leave a Spark · No Name Required</p>
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                <!-- 左側：發射輸入區 (不需輸入名字) -->
-                <div class="lg:col-span-5 bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-100 shadow-xl relative overflow-hidden group">
-                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl group-hover:bg-orange-500/20 transition-all duration-700"></div>
-                    <h3 class="text-xl font-black text-slate-800 mb-6 flex items-center gap-3">
-                        <i class="fa-solid fa-wand-magic-sparkles text-orange-500 animate-pulse"></i> 投遞你的奇思妙想(但作者不會看)
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+                <!-- 左側：發射輸入區 -->
+                <div class="lg:col-span-5 glass-card p-8 md:p-10 rounded-[3rem] relative overflow-hidden group">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl group-hover:bg-orange-500/20 transition-all duration-700"></div>
+                    <h3 class="text-xl font-black text-slate-800 mb-6 flex items-center gap-3 font-serif-tc tracking-wide">
+                        <i class="fa-solid fa-wand-magic-sparkles text-orange-500 animate-pulse"></i> 投遞你的奇思妙想
                     </h3>
                     <div class="relative mb-6">
                         <textarea id="commentInput" rows="4" maxlength="50" placeholder="說點什麼吧...不需要名字，只有靈魂的碰撞 ✨" 
-                            class="w-full bg-slate-50 border-2 border-slate-100 rounded-3xl p-6 font-bold text-slate-700 outline-none transition-all duration-300 resize-none focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 text-base leading-relaxed"
+                            class="w-full bg-white/50 border-2 border-slate-100 rounded-[2rem] p-6 font-bold text-slate-700 outline-none transition-all duration-300 resize-none focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-500/10 text-base leading-relaxed placeholder-slate-400 shadow-inner"
                         ></textarea>
-                        <div class="absolute bottom-4 right-5 text-xs font-black text-slate-400 tracking-wider" id="charCount">0 / 50</div>
+                        <div class="absolute bottom-4 right-5 text-xs font-black text-slate-300 tracking-wider bg-white/80 px-2 py-1 rounded-md" id="charCount">0 / 50</div>
                     </div>
-                    <button onclick="submitComment()" class="w-full py-5 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:from-orange-500 hover:to-orange-600 transition-all duration-300 shadow-xl shadow-slate-900/10 hover:shadow-orange-500/20 active:scale-[0.98]">
+                    <button onclick="submitComment()" class="w-full py-5 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:from-orange-500 hover:to-orange-600 transition-all duration-300 shadow-lg shadow-slate-900/10 hover:shadow-orange-500/25 active:scale-[0.98]">
                         <i class="fa-solid fa-paper-plane"></i> 發射留言
                     </button>
+                    <p class="text-center text-[10px] text-slate-400 mt-4 font-bold tracking-widest">( 註：作者平常不會看 )</p>
                 </div>
                 
                 <!-- 右側：動態展示區 -->
-                <div class="lg:col-span-7 min-h-[540px] bg-slate-950/[0.01] rounded-[3rem] border border-slate-200/60 shadow-inner relative flex flex-col p-6 md:p-8" id="commentCanvas">
-                    <!-- 背景科技感網格 -->
-                    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.01)_1px,transparent_1px)] bg-[size:24px_24px] rounded-[3rem] pointer-events-none"></div>
+                <div class="lg:col-span-7 min-h-[540px] bg-slate-900/[0.02] rounded-[3rem] border border-slate-200/50 shadow-[inset_0_4px_20px_rgba(0,0,0,0.02)] relative flex flex-col p-6 md:p-10 overflow-hidden" id="commentCanvas">
+                    <!-- 科技感裝飾網格 -->
+                    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
                     
-                    <div id="no-comment-tips" class="text-center text-slate-300 font-black text-lg tracking-widest my-auto pointer-events-none transition-all duration-500">
-                        🍃 星雲沉寂中，投遞第一道腦洞波長...
+                    <div id="no-comment-tips" class="text-center text-slate-400 font-black text-lg tracking-widest my-auto pointer-events-none transition-all duration-500 flex flex-col items-center gap-4 opacity-70">
+                        <i class="fa-solid fa-ghost text-4xl mb-2 text-slate-300"></i>
+                        星雲沉寂中，投遞第一道腦洞波長...
                     </div>
                     
-                    <!-- 核心拼接沙盒：電腦端雙列交錯，手機端單列安全排列 -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 pointer-events-auto relative z-10" id="canvasContainer"></div>
+                    <!-- 留言板卡片容器 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8 pointer-events-auto relative z-10" id="canvasContainer"></div>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- ================= 不蒜子 (Busuanzi) 全球遙測面板 ================= -->
-    <footer class="bg-slate-900 mt-20 pt-16 pb-12 border-t-[6px] border-orange-500 relative overflow-hidden">
-        <!-- 背景裝飾 -->
-        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNykiLz48L3N2Zz4=')]"></div>
+    <footer class="bg-slate-950 mt-20 pt-20 pb-12 relative overflow-hidden">
+        <!-- 頂部漸層裝飾線 -->
+        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-600 via-orange-400 to-blue-500"></div>
+        <!-- 背景星空感裝飾 -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNykiLz48L3N2Zz4=')] opacity-50"></div>
         
         <div class="max-w-[1400px] mx-auto px-6 relative z-10">
-            <h3 class="text-slate-500 text-xs font-black tracking-[0.4em] uppercase mb-10 text-center flex items-center justify-center gap-3">
-                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                Busuanzi Telemetry System
+            <h3 class="text-slate-500 text-xs font-black tracking-[0.4em] uppercase mb-12 text-center flex items-center justify-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                Telemetry System Active
             </h3>
             
-            <!-- 數據區 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-20">
                 
-                <!-- Site UV (獨立訪客) -->
-                <div class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-slate-900/60 backdrop-blur-md rounded-3xl p-8 border border-slate-800 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 hover:bg-slate-800/80 hover:border-slate-700 transition-all duration-300">
                     <i class="fa-solid fa-users text-3xl text-orange-400 mb-4 opacity-80"></i>
-                    <span class="text-slate-400 text-[10px] font-black tracking-widest uppercase mb-2">本站總訪客數 (UV)</span>
-                    <div class="text-4xl font-black text-white tracking-tighter">
+                    <span class="text-slate-400 text-[10px] font-black tracking-[0.15em] uppercase mb-3">本站總訪客數 (UV)</span>
+                    <div class="text-4xl font-black text-white tracking-tighter drop-shadow-md">
                         <span id="busuanzi_value_site_uv" class="busuanzi_value">...</span>
                     </div>
                 </div>
 
-                <!-- Site PV (總瀏覽量) -->
-                <div class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-slate-900/60 backdrop-blur-md rounded-3xl p-8 border border-slate-800 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 hover:bg-slate-800/80 hover:border-slate-700 transition-all duration-300">
                     <i class="fa-solid fa-chart-line text-3xl text-blue-400 mb-4 opacity-80"></i>
-                    <span class="text-slate-400 text-[10px] font-black tracking-widest uppercase mb-2">本站總訪問量 (PV)</span>
-                    <div class="text-4xl font-black text-white tracking-tighter">
+                    <span class="text-slate-400 text-[10px] font-black tracking-[0.15em] uppercase mb-3">本站總訪問量 (PV)</span>
+                    <div class="text-4xl font-black text-white tracking-tighter drop-shadow-md">
                         <span id="busuanzi_value_site_pv" class="busuanzi_value">...</span>
                     </div>
                 </div>
 
-                <!-- Page PV (單頁瀏覽量) -->
-                <div class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-slate-900/60 backdrop-blur-md rounded-3xl p-8 border border-slate-800 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 hover:bg-slate-800/80 hover:border-slate-700 transition-all duration-300">
                     <i class="fa-solid fa-file-lines text-3xl text-green-400 mb-4 opacity-80"></i>
-                    <span class="text-slate-400 text-[10px] font-black tracking-widest uppercase mb-2">本儀表板點閱數</span>
-                    <div class="text-4xl font-black text-white tracking-tighter">
+                    <span class="text-slate-400 text-[10px] font-black tracking-[0.15em] uppercase mb-3">本儀表板點閱數</span>
+                    <div class="text-4xl font-black text-white tracking-tighter drop-shadow-md">
                         <span id="busuanzi_value_page_pv" class="busuanzi_value">...</span>
                     </div>
                 </div>
 
             </div>
 
-            <p class="text-center text-slate-500 font-black text-[9px] md:text-[10px] tracking-[0.5em] uppercase">
-                © 2026 無需多言 靜待花開 · Logic Crafted Visualization
-            </p>
+            <div class="flex flex-col items-center justify-center border-t border-slate-800/80 pt-8">
+                <p class="text-slate-500 font-black text-[10px] tracking-[0.4em] uppercase mb-2">
+                    © 2026 無需多言 靜待花開
+                </p>
+                <p class="text-slate-600 font-bold text-[9px] tracking-widest italic">
+                    Logic Crafted Visualization
+                </p>
+            </div>
         </div>
     </footer>
     <!-- ========================================================================= -->
 
-    <!-- 深度分析 Modal -->
-    <div id="analysisModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xl flex items-center justify-center p-4 md:p-10 opacity-0 transition-all duration-500">
-        <div class="bg-white rounded-[3.5rem] shadow-2xl w-full max-w-7xl overflow-y-auto md:overflow-hidden transform scale-95 opacity-0 transition-all duration-500 flex flex-col lg:flex-row max-h-[92vh] md:max-h-[85vh]" id="modalContent">
+    <!-- 深度分析 Modal (彈出視窗設計優化) -->
+    <div id="analysisModal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-md flex items-center justify-center p-4 md:p-8 opacity-0 transition-all duration-500">
+        <div class="bg-white rounded-[2.5rem] md:rounded-[3.5rem] shadow-[0_20px_70px_rgba(0,0,0,0.2)] w-full max-w-7xl overflow-y-auto md:overflow-hidden transform scale-95 opacity-0 transition-all duration-500 flex flex-col lg:flex-row max-h-[95vh] md:max-h-[85vh]" id="modalContent">
             
-            <div class="lg:w-5/12 bg-slate-50 p-10 md:p-16 flex flex-col border-b lg:border-b-0 lg:border-r border-slate-100 lg:overflow-y-auto">
-                <div class="w-full aspect-[2/1] relative overflow-hidden rounded-[2rem] shadow-lg mb-10 border-4 border-white">
+            <div class="lg:w-5/12 bg-slate-50/50 p-8 md:p-12 lg:p-16 flex flex-col border-b lg:border-b-0 lg:border-r border-slate-200/60 lg:overflow-y-auto relative">
+                <div class="w-full aspect-[2/1] relative overflow-hidden rounded-[1.5rem] shadow-md mb-8 border-4 border-white bg-slate-200">
                     <img id="modal-cover" src="" class="fixed-cover">
                 </div>
-                <h2 id="modal-title" class="text-3xl md:text-4xl font-black text-slate-900 mb-6 font-serif-tc leading-tight">標題</h2>
+                <h2 id="modal-title" class="text-3xl md:text-4xl font-black text-slate-900 mb-6 font-serif-tc leading-snug tracking-tight">標題</h2>
                 <div id="modal-tags" class="flex flex-wrap gap-2 mb-10"></div>
-                <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm mb-8">
-                    <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-2">作品進度</span>
-                    <span id="modal-status" class="text-xl font-bold text-slate-700">讀取中...</span>
+                
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="bg-white p-6 rounded-[1.5rem] border border-slate-100 shadow-sm flex flex-col justify-center">
+                        <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-2">作品進度</span>
+                        <span id="modal-status" class="text-lg font-bold text-slate-700">讀取中...</span>
+                    </div>
+                    <div class="bg-white p-6 rounded-[1.5rem] border border-orange-100 shadow-md shadow-orange-500/5 flex flex-col justify-center">
+                        <span class="text-[10px] text-orange-400 font-black uppercase tracking-widest block mb-2">累計觀看人數</span>
+                        <span id="modal-views" class="text-2xl md:text-3xl font-black text-slate-900 tracking-tighter">0</span>
+                    </div>
                 </div>
-                <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-xl">
-                    <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-2 text-orange-500">累計觀看人數</span>
-                    <span id="modal-views" class="text-6xl font-black text-slate-900 tracking-tighter">0</span>
-                </div>
-                <a id="modal-url" href="#" target="_blank" class="mt-10 w-full py-5 bg-slate-900 text-white rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-orange-500 transition-all shadow-xl active:scale-95">
-                    <i class="fa-solid fa-book-open-reader text-2xl"></i> 前往閱讀此書
+                
+                <a id="modal-url" href="#" target="_blank" class="mt-auto w-full py-4 bg-slate-900 text-white rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-orange-500 transition-colors shadow-lg active:scale-95 text-lg">
+                    <i class="fa-solid fa-book-open-reader"></i> 前往閱讀此書
                 </a>
             </div>
 
-            <div class="lg:w-7/12 p-8 md:p-16 relative bg-white flex flex-col">
-                <button onclick="closeModal()" class="absolute top-10 right-10 w-12 h-12 bg-slate-50 hover:bg-slate-100 hover:rotate-90 text-slate-400 hover:text-slate-900 rounded-full flex items-center justify-center transition-all duration-300"><i class="fa-solid fa-xmark text-xl"></i></button>
-                <h3 class="text-2xl font-black text-slate-800 mb-12 tracking-wide font-serif-tc flex items-center"><i class="fa-solid fa-chart-pie text-orange-400 mr-4"></i> 趨勢深度解析</h3>
-                <div class="flex-grow w-full min-h-[350px] md:h-auto"><canvas id="modalChart"></canvas></div>
+            <div class="lg:w-7/12 p-8 md:p-12 lg:p-16 relative bg-white flex flex-col">
+                <button onclick="closeModal()" class="absolute top-6 right-6 md:top-8 md:right-8 w-12 h-12 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 rounded-full flex items-center justify-center transition-all duration-300 hover:rotate-90"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <h3 class="text-2xl font-black text-slate-800 mb-10 tracking-wide font-serif-tc flex items-center"><i class="fa-solid fa-chart-pie text-orange-500 mr-4"></i> 趨勢深度解析</h3>
+                <div class="flex-grow w-full min-h-[300px] md:h-auto"><canvas id="modalChart"></canvas></div>
             </div>
         </div>
     </div>
-
     
     <script>
-        // ================= Firebase 雲端即時留言板（嚴格上限版） =================
-        const DISPLAY_LIMIT = 6; // 👈 畫布上維持最新 6 則留言
+        // ================= Firebase 雲端即時留言板 =================
+        const DISPLAY_LIMIT = 6; 
 
         const firebaseConfig = {
             apiKey: "AIzaSyC2WbAkhhDOZBU5lu3DJ5K2zUO6EXKTgUA",
@@ -372,7 +430,6 @@
             return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
         }
 
-        // 雲端遙測即時監聽
         function initRealtimeComments() {
             const container = document.getElementById('canvasContainer');
             const tips = document.getElementById('no-comment-tips');
@@ -398,10 +455,8 @@
 
                               const tempDiv = document.createElement('div');
                               tempDiv.innerHTML = renderCommentCard(change.doc.id, change.doc.data(), true);
-                              // 讓新留言優雅滑入網格的最前面
                               container.insertBefore(tempDiv.firstElementChild, container.firstChild);
                           }
-                          // 超出上限時，最舊的留言觸發「超維度縮小湮滅」
                           if (change.type === "removed") {
                               const oldNode = document.getElementById(change.doc.id);
                               if (oldNode) {
@@ -415,23 +470,19 @@
                   console.error("Firestore 遙測中斷:", error);
               });
         }
+
+        // 💡 留言卡片 UI 深度美化 (毛玻璃質感、更好的排版層級)
         function renderCommentCard(docId, data, isNew = false) {
-            // 使用 ID 計算出的數學雜湊值調配每張卡片的專屬物理屬性
             const hash = docId.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
-            
-            // 隨機斜切傾斜角度 (-5度 ~ +6度)
-            const rotate = -5 + (hash % 12);      
-            
-            // 獨立的輕柔浮動屬性
-            const duration = 5 + (hash % 4);       // 漂浮週期 5s ~ 8s
-            const floatY = -8 - (hash % 12);       // 垂直漂移幅度 -8px ~ -20px
-            const rOffset = -2 + (hash % 5);       // 微自轉扭曲變量 -2deg ~ 2deg
+            const rotate = -4 + (hash % 9);      
+            const duration = 5 + (hash % 4);      
+            const floatY = -6 - (hash % 10);      
+            const rOffset = -2 + (hash % 5);      
             
             const gradient = avatarGradients[hash % avatarGradients.length];
             const animationClass = isNew ? 'animate-nebula-in' : '';
             const displayTime = formatFirebaseDate(data.timestamp);
 
-            // 將亂數封裝進 CSS 變數驅動核心動畫
             const inlineStyles = `
                 --r-deg: ${rotate}deg; 
                 --f-dur: ${duration}s; 
@@ -440,20 +491,17 @@
             `;
 
             return `
-                <div id="${docId}" class="nebula-node bg-white p-6 rounded-[2.2rem] border border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-orange-500/10 hover:border-orange-300 hover:scale-[1.03] active:scale-95 transition-all duration-300 group ${animationClass}" style="${inlineStyles}">
-                    <div class="absolute inset-0 bg-gradient-to-br ${gradient} opacity-[0.01] group-hover:opacity-[0.05] transition-opacity rounded-[2.2rem] pointer-events-none"></div>
+                <div id="${docId}" class="nebula-node bg-white/80 backdrop-blur-xl p-6 rounded-[2rem] border border-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(249,115,22,0.1)] hover:border-orange-200/60 hover:scale-[1.02] active:scale-95 transition-all duration-300 group flex flex-col ${animationClass}" style="${inlineStyles}">
+                    <div class="absolute inset-0 bg-gradient-to-br ${gradient} opacity-[0.02] group-hover:opacity-[0.05] transition-opacity rounded-[2rem] pointer-events-none"></div>
                     <div class="flex items-start gap-4">
-                        <!-- 量子動態高光粒子 -->
-                        <div class="w-7 h-7 rounded-xl bg-gradient-to-br ${gradient} text-white flex items-center justify-center shadow-md shrink-0 mt-0.5">
-                            <i class="fa-solid fa-bolt text-[9px] animate-pulse"></i>
+                        <div class="w-8 h-8 rounded-xl bg-gradient-to-br ${gradient} text-white flex items-center justify-center shadow-md shrink-0 mt-0.5 transform group-hover:rotate-12 transition-transform duration-300">
+                            <i class="fa-solid fa-bolt text-[10px]"></i>
                         </div>
-                        <div class="flex-grow min-w-0">
-                            <!-- 💡 內文顏色從 text-slate-600 增強為 text-slate-800，字體更清晰醒目 -->
-                            <p class="text-slate-800 font-bold text-sm leading-relaxed font-serif-tc break-words select-text pr-1">${data.text}</p>
-                            <div class="flex items-center justify-between mt-3 pt-2 border-t border-slate-100">
-                                <!-- 💡 時間顏色從 text-slate-300 增強為 text-slate-500，稍微放大至 text-[10px] 提升易讀性 -->
-                                <span class="text-[10px] font-bold text-slate-500 tracking-widest uppercase"><i class="fa-regular fa-clock mr-1"></i> ${displayTime}</span>
-                                <span class="w-1.5 h-1.5 rounded-full bg-gradient-to-br ${gradient} opacity-40 group-hover:opacity-100 transition-opacity"></span>
+                        <div class="flex-grow min-w-0 flex flex-col">
+                            <p class="text-slate-800 font-bold text-[15px] leading-relaxed font-serif-tc break-words select-text pr-1 mb-3">${data.text}</p>
+                            <div class="flex items-center justify-between mt-auto pt-3 border-t border-slate-200/60">
+                                <span class="text-[10px] font-black text-slate-400 tracking-widest uppercase flex items-center"><i class="fa-regular fa-clock mr-1.5 opacity-70"></i> ${displayTime}</span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-gradient-to-br ${gradient} opacity-50 group-hover:opacity-100 transition-opacity shadow-sm"></span>
                             </div>
                         </div>
                     </div>
@@ -466,35 +514,25 @@
             const text = input.value.trim();
             if (!text) return;
 
-            db.collection('comments').add({
-                text: text,
-                timestamp: new Date()
-            })
+            db.collection('comments').add({ text: text, timestamp: new Date() })
             .then(() => {
                 input.value = '';
-                document.getElementById('charCount').innerText = '0 / 200';
+                document.getElementById('charCount').innerText = '0 / 50';
                 if (navigator.vibrate) navigator.vibrate(20);
             })
-            .catch((err) => {
-                console.error("發射思維粒子失敗: ", err);
-            });
+            .catch((err) => { console.error("發射思維粒子失敗: ", err); });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const input = document.getElementById('commentInput');
             if(input) {
                 input.addEventListener('input', function() {
-                    document.getElementById('charCount').innerText = `${this.value.length} / 200`;
+                    document.getElementById('charCount').innerText = `${this.value.length} / 50`;
                 });
             }
         });
 
-
-
-
-
-
-
+        // ================= 數據載入與 UI 渲染 =================
         let globalHistory = [];
         let latestWorks = [];
         let modalChartInstance = null;
@@ -552,6 +590,7 @@
             renderWorkGrid(filtered);
         }
 
+        // 💡 網格卡片重構：調整了比例與陰影階層，漸層遮罩更為平滑
         function renderWorkGrid(works) {
             const grid = document.getElementById('work-grid');
             if (works.length === 0) {
@@ -560,34 +599,34 @@
             }
 
             grid.innerHTML = works.map((work, index) => `
-                <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 overflow-hidden hover-card cursor-pointer group flex flex-col h-full" onclick="openModal('${work.id}')" style="animation: fadeUp 0.6s ${index * 0.1}s both;">
-                    <div class="w-full aspect-[2/1] relative overflow-hidden bg-slate-50">
-                        <img src="${work.cover}" class="fixed-cover transition-transform duration-1000 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-slate-900/20 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-sm">
-                            <span class="px-8 py-3 bg-white text-slate-900 rounded-full text-xs font-black tracking-widest shadow-2xl">數據分析</span>
+                <div class="bg-white/80 backdrop-blur-sm rounded-[2.5rem] shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-white overflow-hidden hover-card cursor-pointer group flex flex-col h-full" onclick="openModal('${work.id}')" style="animation: fadeUp 0.6s ${index * 0.1}s both;">
+                    <div class="w-full aspect-[16/9] relative overflow-hidden bg-slate-100">
+                        <img src="${work.cover}" class="fixed-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                            <span class="px-8 py-3 bg-white/95 text-slate-900 rounded-full text-sm font-black tracking-[0.2em] shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">數據分析 <i class="fa-solid fa-chart-line ml-1 text-orange-500"></i></span>
                         </div>
                     </div>
-                    <div class="p-10 flex flex-col flex-grow">
-                        <h3 class="text-2xl md:text-3xl font-black text-slate-900 leading-snug mb-6 group-hover:text-orange-500 transition-colors font-serif-tc line-clamp-2 h-[4.2rem] overflow-hidden">${work.title}</h3>
+                    <div class="p-8 lg:p-10 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-black text-slate-900 leading-snug mb-5 group-hover:text-orange-600 transition-colors font-serif-tc line-clamp-2 h-[3.8rem] overflow-hidden">${work.title}</h3>
                         
                         <div class="flex flex-wrap gap-2 mb-8">
-                            ${work.tags.slice(0, 3).map(t => `<span class="px-3 py-1 bg-slate-50 text-slate-500 text-[10px] font-bold rounded-lg border border-slate-100">#${t}</span>`).join('')}
-                            ${work.tags.length > 3 ? `<span class="text-slate-300 text-[10px] font-bold self-center">+${work.tags.length - 3}</span>` : ''}
+                            ${work.tags.slice(0, 3).map(t => `<span class="px-3 py-1 bg-slate-100/80 text-slate-600 text-[10px] font-bold rounded-lg border border-slate-200">#${t}</span>`).join('')}
+                            ${work.tags.length > 3 ? `<span class="text-slate-400 text-[10px] font-bold self-center">+${work.tags.length - 3}</span>` : ''}
                         </div>
 
-                        <div class="flex justify-between items-end mb-10 pt-6 border-t border-slate-50 mt-auto">
+                        <div class="flex justify-between items-end mb-8 pt-5 border-t border-slate-100 mt-auto">
                             <div class="flex flex-col">
-                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-1">作品進度</span>
-                                <span class="text-lg text-slate-700 font-black">${formatStatus(work.status)}</span>
+                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-1.5">作品進度</span>
+                                <span class="text-[15px] text-slate-700 font-black">${formatStatus(work.status)}</span>
                             </div>
                             <div class="text-right">
-                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-1 block">累積點閱</span>
-                                <span class="text-3xl font-black text-slate-900 tracking-tighter">${work.views.toLocaleString()}</span>
+                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-1.5 block">累積點閱</span>
+                                <span class="text-2xl font-black text-slate-900 tracking-tighter">${work.views.toLocaleString()}</span>
                             </div>
                         </div>
 
-                        <a href="${work.url}" target="_blank" onclick="event.stopPropagation()" class="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-orange-500 transition-all shadow-xl active:scale-95">
-                            <i class="fa-solid fa-book-open-reader text-xl"></i> 立即閱讀
+                        <a href="${work.url}" target="_blank" onclick="event.stopPropagation()" class="w-full py-4 bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-slate-900 group-hover:border-slate-900 group-hover:text-white rounded-[1rem] font-black text-sm flex items-center justify-center gap-2 transition-all duration-300 active:scale-95">
+                            <i class="fa-solid fa-book-open-reader"></i> 立即閱讀
                         </a>
                     </div>
                 </div>
@@ -607,12 +646,21 @@
             document.getElementById('modal-url').href = bookInfo.url || '#';
             
             const tagContainer = document.getElementById('modal-tags');
-            tagContainer.innerHTML = bookInfo.tags.map(t => `<span class="px-4 py-1.5 bg-white text-slate-500 text-xs font-bold rounded-xl border border-slate-100">#${t}</span>`).join('');
+            tagContainer.innerHTML = bookInfo.tags.map(t => `<span class="px-4 py-1.5 bg-white shadow-sm text-slate-600 text-xs font-bold rounded-xl border border-slate-200">#${t}</span>`).join('');
+
+            const rawBookHistory = globalHistory.filter(h => h.works.some(work => work.id === bookId));
+            const maxPoints = window.innerWidth < 768 ? 5 : 10;
+            let compressedHistory = rawBookHistory;
+            
+            if (rawBookHistory.length > maxPoints) {
+                const step = (rawBookHistory.length - 1) / (maxPoints - 1);
+                compressedHistory = Array.from({length: maxPoints}, (_, i) => rawBookHistory[Math.round(i * step)]);
+            }
 
             const historyLabels = [];
             const historyData = [];
 
-            globalHistory.forEach(h => {
+            compressedHistory.forEach(h => {
                 const w = h.works.find(work => work.id === bookId);
                 if (w) { 
                     historyLabels.push(h.update_time.split(' ')[0].slice(5).replace('-', '/'));
@@ -622,8 +670,8 @@
 
             if(modalChartInstance) modalChartInstance.destroy();
             const ctx = document.getElementById('modalChart').getContext('2d');
-            let gradient = ctx.createLinearGradient(0, 0, 0, 450);
-            gradient.addColorStop(0, 'rgba(249, 115, 22, 0.2)');
+            let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(249, 115, 22, 0.25)');
             gradient.addColorStop(1, 'rgba(249, 115, 22, 0)');
 
             modalChartInstance = new Chart(ctx, {
@@ -639,14 +687,40 @@
                         fill: true,
                         backgroundColor: gradient,
                         pointRadius: 0,
-                        pointHoverRadius: 10,
+                        pointHoverRadius: 8,
                         pointBackgroundColor: '#fff',
-                        pointBorderWidth: 4
+                        pointBorderWidth: 3
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 1500, easing: 'easeOutQuart' }, plugins: { legend: { display: false } },
-                    scales: { x: { grid: { display: false }, ticks: { font: { weight: 'bold' } } },
-                        y: { border: { display: false }, grid: { color: '#f1f5f9' }, ticks: { font: { weight: 'bold' } } } }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    animation: { duration: 1200, easing: 'easeOutQuart' }, 
+                    interaction: { mode: 'index', intersect: false }, 
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleFont: { size: 13, family: "'Noto Sans TC', sans-serif" },
+                            bodyFont: { size: 15, weight: 'bold', family: "'Noto Sans TC', sans-serif" },
+                            padding: 12,
+                            cornerRadius: 12,
+                            displayColors: false
+                        }
+                    },
+                    scales: { 
+                        x: { 
+                            grid: { display: false }, 
+                            ticks: { 
+                                font: { weight: 'bold' },
+                                autoSkip: true,
+                                maxTicksLimit: window.innerWidth < 768 ? 5 : 10,
+                                maxRotation: 0,
+                                minRotation: 0
+                            } 
+                        },
+                        y: { border: { display: false }, grid: { color: '#f1f5f9', borderDash: [5, 5] }, ticks: { font: { weight: 'bold' } } } 
+                    }
                 }
             });
 
@@ -668,42 +742,57 @@
         document.getElementById('analysisModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
         function renderMainChart(history) {
-            // 🛠️ 1. 拿掉 .slice(-20)，直接使用完整的 history 數據
-            const displaySet = history; 
-            const labels = displaySet.map(h => h.update_time.split(' ')[0].slice(5).replace('-', '/'));
-            const data = displaySet.map(h => h.works.reduce((s, w) => s + w.views, 0));
+            const maxPoints = window.innerWidth < 768 ? 5 : 10;
+            let compressedHistory = history;
+            
+            if (history.length > maxPoints) {
+                const step = (history.length - 1) / (maxPoints - 1);
+                compressedHistory = Array.from({length: maxPoints}, (_, i) => history[Math.round(i * step)]);
+            }
+
+            const labels = compressedHistory.map(h => h.update_time.split(' ')[0].slice(5).replace('-', '/'));
+            const data = compressedHistory.map(h => h.works.reduce((s, w) => s + w.views, 0));
             
             if(mainChartInstance) mainChartInstance.destroy();
             const ctx = document.getElementById('mainChart').getContext('2d');
             let gradient = ctx.createLinearGradient(0, 0, 0, 450);
-            gradient.addColorStop(0, 'rgba(15, 23, 42, 0.08)');
+            gradient.addColorStop(0, 'rgba(15, 23, 42, 0.1)');
             gradient.addColorStop(1, 'rgba(15, 23, 42, 0)');
 
             mainChartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
-                    datasets: [{ label: '全網點閱', data: data, borderColor: '#0f172a', borderWidth: 5, tension: 0.4, fill: true, backgroundColor: gradient, pointRadius: 0, pointHoverRadius: 8, pointBackgroundColor: '#fff', pointBorderColor: '#0f172a', pointBorderWidth: 3 }]
+                    datasets: [{ label: '全網點閱', data: data, borderColor: '#0f172a', borderWidth: 4, tension: 0.4, fill: true, backgroundColor: gradient, pointRadius: 0, pointHoverRadius: 8, pointBackgroundColor: '#fff', pointBorderColor: '#0f172a', pointBorderWidth: 3 }]
                 },
                 options: { 
                     responsive: true, 
                     maintainAspectRatio: false, 
-                    animation: { duration: 2000, easing: 'easeOutExpo' }, 
+                    animation: { duration: 1500, easing: 'easeOutExpo' }, 
                     interaction: { mode: 'index', intersect: false }, 
-                    plugins: { legend: { display: false } },
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                            titleFont: { size: 13, family: "'Noto Sans TC', sans-serif" },
+                            bodyFont: { size: 16, weight: 'bold', family: "'Noto Sans TC', sans-serif" },
+                            padding: 14,
+                            cornerRadius: 12,
+                            displayColors: false
+                        }
+                    },
                     scales: { 
                         x: { 
                             grid: { display: false }, 
-                            // 🛠️ 2. 優化 Ticks 設定，讓時間軸標籤自動調整間隔
                             ticks: { 
-                                font: { weight: 'bold' },
-                                autoSkip: true,       // 啟動自動跳過密集標籤的功能
-                                maxTicksLimit: 10,    // 限制畫面上最多顯示 10 個日期標籤（可依喜好調整，改 8 或 12 都可以）
-                                maxRotation: 0,       // 限制字體不要斜著長，維持水平比較美觀
+                                font: { weight: 'bold', color: '#64748b' },
+                                autoSkip: true, 
+                                maxTicksLimit: window.innerWidth < 768 ? 5 : 10, 
+                                maxRotation: 0, 
                                 minRotation: 0
                             } 
                         },
-                        y: { border: { display: false }, grid: { color: '#f8fafc', borderDash: [6, 6] }, ticks: { font: { weight: 'bold' } } } 
+                        y: { border: { display: false }, grid: { color: '#f1f5f9', borderDash: [5, 5] }, ticks: { font: { weight: 'bold', color: '#64748b' } } } 
                     }
                 }
             });
